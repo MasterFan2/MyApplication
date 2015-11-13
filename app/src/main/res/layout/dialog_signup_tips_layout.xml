@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minWidth="400dp"
+    android:orientation="vertical"
+    android:layout_marginBottom="-20dp"
+    >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:weightSum="2">
+
+        <RelativeLayout
+            android:id="@+id/expandableLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent">
+
+            <TextView
+                android:id="@+id/signup_tips_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:padding="3dp"
+                android:text="更新事项" />
+
+            <com.jsbn.mgr.widget.velocimeter.VelocimeterView
+                android:id="@+id/velocimeter"
+                android:layout_width="160dp"
+                android:layout_height="160dp"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="right"
+                android:layout_marginRight="-160dp"
+                app:bottom_velocimeter_color="@color/bottom_velocimeter"
+                app:digital_number_blur_color="@color/digital_number"
+                app:digital_number_color="@color/gray_1000"
+                app:external_progress_color="@color/green"
+                app:inside_progress_color="@color/gray_400"
+                app:internal_velocimeter_color="@color/gray_600"
+                app:max="4096"
+                app:needle_blur_color="@color/green_enable_false"
+                app:needle_color="@color/green_enable_false"
+                app:progress_blur_color="@color/green"
+                app:show_bottom_bar="false"
+                app:units="kb" />
+        </RelativeLayout>
+    </LinearLayout>
+</LinearLayout>

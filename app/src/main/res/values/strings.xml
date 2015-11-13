@@ -1,0 +1,21 @@
+<resources>
+
+    <string name="app_name">档期管理</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="title_activity_launcher">LauncherActivity</string>
+    <string name="title_activity_update_pwd">UpdatePwdActivity</string>
+    <string name="title_activity_my_member">MyMemberActivity</string>
+    <string name="title_activity_member_schedule">MemberScheduleActivity</string>
+
+    <string name="pickerview_cancel">取消</string>
+    <string name="pickerview_submit">确定</string>
+    <string name="pickerview_year">年</string>
+    <string name="pickerview_month">月</string>
+    <string name="pickerview_day">日</string>
+    <string name="pickerview_hours">时</string>
+    <string name="pickerview_minutes">分</string>
+    <string name="pickerview_seconds">秒</string>
+</resources>

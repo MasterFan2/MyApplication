@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:weightSum="2">
+
+        <LinearLayout
+            android:id="@+id/expandableLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:id="@+id/add_desc_date_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="3dp"
+                android:text="日期：-" />
+            <com.jsbn.mgr.widget.common.EditText
+                android:id="@+id/add_desc_edit"
+                android:layout_marginTop="16dp"
+                style="@style/Material.Widget.EditText.Light"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:et_dividerPadding="8dp"
+                app:et_supportPadding="5dp"
+                app:et_dividerHeight="1dp"
+                android:textCursorDrawable="@null"
+                android:hint="填写备注信息"
+                android:textColorHint="@color/gray_500"
+                android:inputType="text"
+                android:text=""
+                android:textSize="14sp"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                android:textColor="#FF000000"
+                app:et_dividerErrorColor="#FFFF0000"
+                app:et_dividerColor="@color/edit_text_line_state"
+                app:et_helper=""
+                app:et_inputId="@+id/textfield_et_helper_input"
+                app:et_labelTextColor="@drawable/color_label"
+                app:et_supportMode="helper"
+                app:et_supportTextErrorColor="#FFFF0000" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

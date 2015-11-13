@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="RippleView">
+        <attr name="rd_style" />
+        <attr name="rd_enable" />
+    </declare-styleable>
+
+    <attr name="rd_style" format="reference" />
+
+    <declare-styleable name="RippleDrawable">
+        <attr name="rd_enable" format="boolean" />
+        <attr name="rd_backgroundColor" format="reference|color" />
+        <attr name="rd_backgroundAnimDuration" format="reference|integer" />
+        <attr name="rd_maxRippleRadius" format="reference|dimension|integer">
+            <enum name="match_view" value="0x00000000" />
+        </attr>
+        <attr name="rd_rippleColor" format="reference|color" />
+        <attr name="rd_rippleAnimDuration" format="reference|integer" />
+        <attr name="rd_inInterpolator" format="reference" />
+        <attr name="rd_outInterpolator" format="reference" />
+        <attr name="rd_maskType" format="integer">
+            <enum name="rectangle" value="0x00000000" />
+            <enum name="oval" value="0x00000001" />
+        </attr>
+        <attr name="rd_rippleType" format="integer">
+            <enum name="touch" value="0x00000000" />
+            <enum name="wave" value="0x00000001" />
+        </attr>
+        <attr name="rd_cornerRadius" format="reference|dimension" />
+        <attr name="rd_topLeftCornerRadius" format="reference|dimension" />
+        <attr name="rd_topRightCornerRadius" format="reference|dimension" />
+        <attr name="rd_bottomLeftCornerRadius" format="reference|dimension" />
+        <attr name="rd_bottomRightCornerRadius" format="reference|dimension" />
+        <attr name="rd_padding" format="reference|dimension" />
+        <attr name="rd_leftPadding" format="reference|dimension" />
+        <attr name="rd_topPadding" format="reference|dimension" />
+        <attr name="rd_rightPadding" format="reference|dimension" />
+        <attr name="rd_bottomPadding" format="reference|dimension" />
+        <attr name="rd_delayClick" format="integer">
+            <enum name="none" value="0x00000000" />
+            <enum name="untilRelease" value="0x00000001" />
+            <enum name="afterRelease" value="0x00000002" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="EditText">
+        <attr name="et_inputId" format="reference" />
+        <attr name="et_labelEnable" format="boolean" />
+        <attr name="et_labelPadding" format="reference|dimension" />
+        <attr name="et_labelTextSize" format="reference|dimension" />
+        <attr name="et_labelTextColor" format="reference|color" />
+        <attr name="et_labelTextAppearance" format="reference" />
+        <attr name="et_labelEllipsize" format="integer">
+            <enum name="start" value="0x00000001" />
+            <enum name="middle" value="0x00000002" />
+            <enum name="end" value="0x00000003" />
+            <enum name="marquee" value="0x00000004" />
+        </attr>
+        <attr name="et_labelInAnim" format="reference" />
+        <attr name="et_labelOutAnim" format="reference" />
+        <attr name="et_supportMode" format="integer">
+            <enum name="none" value="0x00000000" />
+            <enum name="helper" value="0x00000001" />
+            <enum name="helperWithError" value="0x00000002" />
+            <enum name="charCounter" value="0x00000003" />
+        </attr>
+        <attr name="et_supportMaxChars" format="reference|integer" />
+        <attr name="et_helper" format="reference|string" />
+        <attr name="et_error" format="reference|string" />
+        <attr name="et_supportPadding" format="reference|dimension" />
+        <attr name="et_supportTextSize" format="reference|dimension" />
+        <attr name="et_supportTextColor" format="reference|color" />
+        <attr name="et_supportTextErrorColor" format="reference|color" />
+        <attr name="et_supportTextAppearance" format="reference" />
+        <attr name="et_supportSingleLine" format="boolean" />
+        <attr name="et_supportMaxLines" format="reference|integer" />
+        <attr name="et_supportLines" format="reference|integer" />
+        <attr name="et_supportEllipsize" format="integer">
+            <enum name="start" value="0x00000001" />
+            <enum name="middle" value="0x00000002" />
+            <enum name="end" value="0x00000003" />
+            <enum name="marquee" value="0x00000004" />
+        </attr>
+        <attr name="et_dividerColor" format="reference|color" />
+        <attr name="et_dividerErrorColor" format="reference|color" />
+        <attr name="et_dividerHeight" format="reference|dimension" />
+        <attr name="et_dividerPadding" format="reference|dimension" />
+        <attr name="et_dividerAnimDuration" format="reference|integer" />
+        <attr name="et_dividerCompoundPadding" format="boolean" />
+        <attr name="et_autoCompleteMode" format="integer">
+            <enum name="none" value="0" />
+            <enum name="single" value="1" />
+            <enum name="multi" value="2" />
+        </attr>
+    </declare-styleable>
+
+
+    <!-- MaterialRippleLayout  -->
+    <declare-styleable name="MaterialRippleLayout">
+        <attr name="mr_rippleColor" format="color" localization="suggested" />
+        <attr name="rippleDimension" format="dimension" localization="suggested" />
+        <attr name="rippleOverlay" format="boolean" localization="suggested" />
+        <attr name="rippleAlpha" format="float" localization="suggested" />
+        <attr name="rippleDuration" format="integer" localization="suggested" />
+        <attr name="rippleFadeDuration" format="integer" localization="suggested" />
+        <attr name="rippleHover" format="boolean" localization="suggested" />
+        <attr name="rippleBackground" format="color" localization="suggested" />
+        <attr name="rippleDelayClick" format="boolean" localization="suggested" />
+        <attr name="ripplePersistent" format="boolean" localization="suggested" />
+        <attr name="rippleInAdapter" format="boolean" localization="suggested" />
+    </declare-styleable>
+
+    <!-- velocimeter -->
+    <declare-styleable name="VelocimeterView">
+        <attr name="inside_progress_color"
+            format="color"/>
+        <attr name="external_progress_color"
+            format="color"/>
+        <attr name="progress_blur_color"
+            format="color"/>
+        <attr name="bottom_velocimeter_color"
+            format="color"/>
+        <attr name="internal_velocimeter_color"
+            format="color"/>
+        <attr name="needle_color"
+            format="color"/>
+        <attr name="needle_blur_color"
+            format="color"/>
+        <attr name="digital_number_color"
+            format="color"/>
+        <attr name="digital_number_blur_color"
+            format="color"/>
+        <attr name="max"
+            format="integer"/>
+        <attr name="units"
+            format="string"/>
+        <attr name="show_bottom_bar"
+            format="boolean"/>
+    </declare-styleable>
+
+    <!--ProcessButton-->
+    <declare-styleable name="ProcessButton">
+        <attr name="pb_textProgress" format="string" />
+        <attr name="pb_textComplete" format="string" />
+        <attr name="pb_textError" format="string" />
+        <attr name="pb_colorProgress" format="color" />
+        <attr name="pb_colorComplete" format="color" />
+        <attr name="pb_colorError" format="color" />
+    </declare-styleable>
+    <declare-styleable name="FlatButton">
+        <attr name="pb_colorPressed" format="color" />
+        <attr name="pb_colorNormal" format="color" />
+        <attr name="pb_cornerRadius" format="dimension" />
+    </declare-styleable>
+
+    <!-- expandable -->
+    <declare-styleable name="expandableLayout">
+        <attr name="duration" format="integer" />
+        <attr name="defaultVisibility" format="boolean" />
+        <attr name="orientation" format="enum">
+            <enum name="horizontal" value="0" />
+            <enum name="vertical" value="1" />
+        </attr>
+        <attr name="interpolator" format="enum">
+            <enum name="accelerateDecelerate" value="0" />
+            <enum name="accelerate" value="1" />
+            <enum name="anticipate" value="2" />
+            <enum name="anticipateOvershoot" value="3" />
+            <enum name="bounce" value="4" />
+            <enum name="decelerate" value="5" />
+            <enum name="fastOutLinear" value="6" />
+            <enum name="fastOutSlowIn" value="7" />
+            <enum name="linear" value="8" />
+            <enum name="linearOutSlowIn" value="9" />
+            <enum name="overshoot" value="10" />
+        </attr>
+    </declare-styleable>
+
+
+    <declare-styleable name="SimpleTagImageView">
+        <attr name="simple_corner_distance" format="dimension" />
+        <attr name="simple_tag_width" format="dimension"/>
+        <attr name="simple_tag_background_color" format="color"/>
+        <attr name="simple_tag_text" format="string"/>
+        <attr name="simple_tag_textSize" format="dimension" />
+        <attr name="simple_tag_textColor" format="color"/>
+        <attr name="simple_tag_orientation" format="enum">
+            <enum name="left_top" value="0"/>
+            <enum name="right_top" value="1"/>
+            <enum name="left_bottom" value="2"/>
+            <enum name="right_bottom" value="3"/>
+        </attr>
+        <attr name="simple_tag_enable" format="boolean"/>
+        <attr name="simple_tag_round_radius" format="dimension"/>
+    </declare-styleable>
+
+    <!-- indexer -->
+    <declare-styleable name="FancyIndexer">
+        <attr name="widthOffset" format="dimension" />
+        <attr name="minFontSize" format="integer" />
+        <attr name="maxFontSize" format="integer" />
+        <attr name="tipFontSize" format="integer" />
+        <attr name="maxBezierHeight" format="dimension" />
+        <attr name="maxBezierWidth" format="dimension" />
+        <attr name="maxBezierLines" format="integer" />
+        <attr name="additionalTipOffset" format="dimension" />
+        <attr name="fontColor" format="color" />
+        <attr name="tipFontColor" format="color" />
+    </declare-styleable>
+
+    <!-- Spinner -->
+    <declare-styleable name="MaterialSpinner">
+        <attr name="ms_baseColor" format="integer"/>
+        <attr name="ms_highlightColor" format="integer"/>
+        <attr name="ms_errorColor" format="integer"/>
+        <attr name="ms_error" format="string"/>
+        <attr name="ms_hint" format="string"/>
+        <attr name="ms_hintColor" format="color"/>
+        <attr name="ms_floatingLabelText" format="string"/>
+        <attr name="ms_floatingLabelColor" format="color"/>
+        <attr name="ms_multiline" format="boolean"/>
+        <attr name="ms_nbErrorLines" format="integer"/>
+        <attr name="ms_typeface" format="string"/>
+        <attr name="ms_alignLabels" format="boolean"/>
+        <attr name="ms_thickness" format="dimension"/>
+        <attr name="ms_thickness_error" format="dimension"/>
+        <attr name="ms_arrowSize" format="dimension"/>
+        <attr name="ms_arrowColor" format="color"/>
+        <attr name="ms_enableFloatingLabel" format="boolean"/>
+        <attr name="ms_enableErrorLabel" format="boolean"/>
+    </declare-styleable>
+
+
+    <declare-styleable name="AVLoadingIndicatorView">
+        <attr name="indicator">
+            <flag name="BallPulse" value="0"/>
+            <flag name="BallGridPulse" value="1"/>
+            <flag name="BallClipRotate" value="2"/>
+            <flag name="BallClipRotatePulse" value="3"/>
+            <flag name="SquareSpin" value="4"/>
+            <flag name="BallClipRotateMultiple" value="5"/>
+            <flag name="BallPulseRise" value="6"/>
+            <flag name="BallRotate" value="7"/>
+            <flag name="CubeTransition" value="8"/>
+            <flag name="BallZigZag" value="9"/>
+            <flag name="BallZigZagDeflect" value="10"/>
+            <flag name="BallTrianglePath" value="11"/>
+            <flag name="BallScale" value="12"/>
+            <flag name="LineScale" value="13"/>
+            <flag name="LineScaleParty" value="14"/>
+            <flag name="BallScaleMultiple" value="15"/>
+            <flag name="BallPulseSync" value="16"/>
+            <flag name="BallBeat" value="17"/>
+            <flag name="LineScalePulseOut" value="18"/>
+            <flag name="LineScalePulseOutRapid" value="19"/>
+            <flag name="BallScaleRipple" value="20"/>
+            <flag name="BallScaleRippleMultiple" value="21"/>
+            <flag name="BallSpinFadeLoader" value="22"/>
+            <flag name="LineSpinFadeLoader" value="23"/>
+            <flag name="TriangleSkewSpin" value="24"/>
+            <flag name="Pacman" value="25"/>
+            <flag name="BallGridBeat" value="26"/>
+            <flag name="SemiCircleSpin" value="27"/>
+        </attr>
+        <attr name="indicator_color" format="color"/>
+    </declare-styleable>
+</resources>

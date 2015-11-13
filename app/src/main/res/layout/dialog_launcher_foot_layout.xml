@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/dialog_foot_background"
+    android:orientation="horizontal"
+    android:paddingBottom="@dimen/activity_horizontal_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:gravity="right"
+    android:paddingTop="@dimen/activity_horizontal_margin">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <com.jsbn.mgr.widget.MaterialRippleLayout
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            app:rippleAlpha="0.2"
+            app:rippleColor="#585858"
+            app:rippleDelayClick="false"
+            app:rippleHover="true"
+            app:rippleOverlay="true">
+
+            <Button
+                android:id="@+id/version_cancel_Btn"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/login_btn_bg"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:text="取消"
+                android:textColor="@android:color/white"
+                android:textSize="18sp" />
+        </com.jsbn.mgr.widget.MaterialRippleLayout>
+
+        <com.jsbn.mgr.widget.MaterialRippleLayout
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            app:rippleAlpha="0.2"
+            android:layout_marginLeft="10dp"
+            app:rippleColor="#585858"
+            app:rippleDelayClick="false"
+            app:rippleHover="true"
+            app:rippleOverlay="true">
+
+            <com.jsbn.mgr.widget.probutton.SubmitProcessButton
+                android:id="@+id/version_update_btn"
+                android:layout_width="fill_parent"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:background="@drawable/login_btn_bg"
+                android:text="更新"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                app:pb_colorComplete="@color/green"
+                app:pb_colorProgress="@color/green_enable_false"
+                app:pb_textComplete="下载完成"
+                app:pb_textProgress="下载中..." />
+        </com.jsbn.mgr.widget.MaterialRippleLayout>
+    </LinearLayout>
+</LinearLayout>
+
+
+

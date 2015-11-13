@@ -1,0 +1,116 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minWidth="400dp"
+    android:background="@drawable/dialog_background"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@color/base_white_color"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:weightSum="2">
+
+        <TextView
+            android:id="@+id/version_description_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:padding="3dp"
+            android:text="" />
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="0.25dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/gray_600" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <com.jsbn.mgr.widget.MaterialRippleLayout
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                app:rippleAlpha="0.2"
+                app:rippleColor="#585858"
+                app:rippleDelayClick="false"
+                app:rippleHover="true"
+                app:rippleOverlay="true">
+
+                <Button
+                    android:id="@+id/version_cancel_Btn"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/login_btn_bg"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="10dp"
+                    android:text="取消"
+                    android:textColor="@android:color/white"
+                    android:textSize="18sp" />
+            </com.jsbn.mgr.widget.MaterialRippleLayout>
+
+            <com.jsbn.mgr.widget.MaterialRippleLayout
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                app:rippleAlpha="0.2"
+                android:layout_marginLeft="10dp"
+                app:rippleColor="#585858"
+                app:rippleDelayClick="false"
+                app:rippleHover="true"
+                app:rippleOverlay="true">
+
+                <com.jsbn.mgr.widget.probutton.SubmitProcessButton
+                    android:id="@+id/version_update_btn"
+                    android:layout_width="fill_parent"
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/login_btn_bg"
+                    android:text="更新"
+                    android:textColor="@android:color/white"
+                    android:textSize="18sp"
+                    app:pb_colorComplete="@color/green"
+                    app:pb_colorProgress="@color/green_enable_false"
+                    app:pb_textComplete="下载完成"
+                    app:pb_textProgress="下载中..." />
+            </com.jsbn.mgr.widget.MaterialRippleLayout>
+        </LinearLayout>
+    </LinearLayout>
+    <com.jsbn.mgr.widget.expandlayout.ExpandableRelativeLayout
+        android:id="@+id/expandableLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:duration="500"
+        app:interpolator="accelerateDecelerate"
+        app:orientation="vertical"
+        >
+        <com.jsbn.mgr.widget.velocimeter.VelocimeterView
+            android:id="@+id/velocimeter"
+            android:layout_width="200dp"
+            android:layout_gravity="right"
+            android:layout_height="200dp"
+            app:inside_progress_color="@color/gray_400"
+            app:external_progress_color="@color/green"
+            app:progress_blur_color="@color/green"
+            app:bottom_velocimeter_color="@color/bottom_velocimeter"
+            app:internal_velocimeter_color="@color/gray_600"
+            app:needle_color="@color/green_enable_false"
+            app:needle_blur_color="@color/green_enable_false"
+            app:digital_number_color="@color/gray_1000"
+            app:digital_number_blur_color="@color/digital_number"
+            app:show_bottom_bar="false"
+            app:max="4096"
+            app:units="kb"
+            android:layout_alignParentRight="true"
+            />
+    </com.jsbn.mgr.widget.expandlayout.ExpandableRelativeLayout>
+</LinearLayout>
