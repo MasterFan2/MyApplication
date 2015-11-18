@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/title_root_view"
+    android:layout_width="match_parent"
+    android:layout_height="55dp"
+    android:background="@color/base_color"
+    >
+
+    <com.jsbn.mgr.widget.MaterialRippleLayout
+        android:id="@+id/m_title_left_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        app:rippleAlpha="0.2"
+        app:rippleColor="#585858"
+        app:rippleDelayClick="false"
+        app:rippleHover="true"
+        app:rippleOverlay="true">
+
+        <TextView
+            android:id="@+id/m_title_left_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:paddingBottom="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="20dp"
+            android:paddingTop="10dp"
+            android:textSize="16sp"
+            android:text="  "
+            android:textColor="@android:color/white"
+            android:gravity="center"
+            android:drawableLeft="@mipmap/ic_m_title_back" />
+    </com.jsbn.mgr.widget.MaterialRippleLayout>
+
+    <com.jsbn.mgr.widget.MaterialRippleLayout
+        android:id="@+id/m_title_right_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_alignParentRight="true"
+        app:rippleAlpha="0.2"
+        app:rippleColor="#585858"
+        app:rippleDelayClick="false"
+        app:rippleHover="true"
+        app:rippleOverlay="true">
+
+        <ImageView
+            android:id="@+id/m_title_right_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:text="ok"
+            android:src="@mipmap/ic_more"
+            />
+    </com.jsbn.mgr.widget.MaterialRippleLayout>
+
+    <TextView
+        android:id="@+id/m_title_context_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:textColor="@android:color/white"
+        android:gravity="center_horizontal"
+        android:singleLine="true"
+        android:text="MasterTitle"
+        android:textSize="20sp" />
+</RelativeLayout>

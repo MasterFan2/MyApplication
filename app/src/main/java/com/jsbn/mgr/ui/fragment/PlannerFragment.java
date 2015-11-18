@@ -259,6 +259,10 @@ public class PlannerFragment extends BaseFragment implements OnClickListener, Sw
         @Override
         public void failure(RetrofitError error) {
             if(dialog != null && dialog.isShowing()) dialog.dismiss();
+            if(isRefresh)  {
+                refreshLayout.setRefreshing(false);
+                isRefresh = false;
+            }
             T.s(getActivity(), "获取数据错误");
         }
     };
@@ -397,6 +401,7 @@ public class PlannerFragment extends BaseFragment implements OnClickListener, Sw
                 public void onClick(View v) {
                     Intent intent = new Intent(getActivity(), PlannerScheduleActivity.class);
                     intent.putExtra("personId", member.getPersonId() + "");
+                    intent.putExtra("isLocked", member.getIsScheduleScreen());
                     animStart(intent);
                 }
             });

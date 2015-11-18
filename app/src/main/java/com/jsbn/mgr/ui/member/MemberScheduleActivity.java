@@ -3,6 +3,8 @@ package com.jsbn.mgr.ui.member;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -131,7 +133,7 @@ public class MemberScheduleActivity extends BaseActivity implements MonthView.On
                 .setContentHolder(holder)
                 .setHeader(headView)
                 .setFooter(R.layout.dialog_foot_layout)
-                .setCancelable(true)
+                .setCancelable(false)
                 .setOnClickListener(MemberScheduleActivity.this)
                 .setGravity(MTDialog.Gravity.TOP)
                 .create();
@@ -142,6 +144,21 @@ public class MemberScheduleActivity extends BaseActivity implements MonthView.On
         int year  = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH) + 1;
         int day   = calendar.get(Calendar.DAY_OF_MONTH);
+
+        //
+        picker.setOnRefreshClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new Handler(){
+                    @Override
+                    public void handleMessage(Message msg) {
+                        picker.refresh();
+                        picker.invalidate();
+                        getAllSchedules();
+                    }
+                }.sendEmptyMessage(0);
+            }
+        });
 
         picker.setOnDaySelected(this);
         picker.setOnMonthChange(this);
@@ -278,6 +295,7 @@ public class MemberScheduleActivity extends BaseActivity implements MonthView.On
     @Override
     public void onMonthChange(int month) {
         currentMonth = month;
+        picker.refresh();
         getAllSchedules();
     }
 

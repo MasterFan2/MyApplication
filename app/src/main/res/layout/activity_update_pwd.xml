@@ -6,12 +6,21 @@
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolBar"
+    <!--<android.support.v7.widget.Toolbar-->
+        <!--android:id="@+id/toolBar"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="?attr/actionBarSize"-->
+        <!--android:background="@color/gray_900"-->
+        <!--app:title="修改密码" />-->
+    <com.jsbn.mgr.widget.masterfan.MasterTitleView
+        android:id="@+id/titleView"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/gray_900"
-        app:title="修改密码" />
+        app:titleBackground="@color/gray_900"
+        app:titleText="修改密码"
+        app:titleTxtColor="@android:color/white"
+        app:rightButtonHide="true"
+        />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -74,6 +83,31 @@
                 app:et_supportMode="helper"
                 app:et_supportPadding="5dp"
                 app:et_supportTextErrorColor="#FFFF0000" />
+
+            <com.jsbn.mgr.widget.common.EditText
+                android:id="@+id/update_confirmPwd_edit"
+                style="@style/Material.Widget.EditText.Light"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:hint="新密码"
+                android:inputType="textPassword"
+                android:text=""
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                android:textColor="#FF000000"
+                android:textColorHint="@color/gray_500"
+                android:textCursorDrawable="@null"
+                android:textSize="14sp"
+                app:et_dividerColor="@color/edit_text_line_state"
+                app:et_dividerErrorColor="#FFFF0000"
+                app:et_dividerHeight="1dp"
+                app:et_dividerPadding="8dp"
+                app:et_helper=""
+                app:et_inputId="@+id/textfield_et_helper_input"
+                app:et_labelTextColor="@drawable/color_label"
+                app:et_supportMode="helper"
+                app:et_supportPadding="5dp"
+                app:et_supportTextErrorColor="#FFFF0000" />
         </LinearLayout>
 
 
@@ -89,10 +123,10 @@
                 style="@style/RaiseColorButtonRippleStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/green_btn_bg"
+                android:background="@drawable/logout_btn_bg"
                 android:text="修改密码"
                 android:textSize="17sp"
-                android:textColor="@android:color/white" />
+                android:textColor="@color/indexer_text_color" />
         </LinearLayout>
     </LinearLayout>
 

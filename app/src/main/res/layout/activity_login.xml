@@ -7,12 +7,15 @@
     android:orientation="vertical"
     >
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolBar"
+    <com.jsbn.mgr.widget.masterfan.MasterTitleView
+        android:id="@+id/titleView"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/gray_900"
-        app:title="四大金刚管理端"
+        app:titleBackground="@color/gray_900"
+        app:titleText="登录"
+        app:titleTxtColor="@android:color/white"
+        app:rightButtonHide="true"
+        app:leftButtonHide="true"
         />
     <LinearLayout
         android:layout_width="match_parent"
@@ -70,6 +73,7 @@
                         app:simple_tag_round_radius="8dp"
                         android:scaleType="centerCrop"
                         app:simple_tag_enable="false"
+                        android:visibility="gone"
                         />
                     <TextView
                         android:id="@+id/login_success_account_txt"
@@ -123,8 +127,8 @@
                 android:id="@+id/login_login_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/green_btn_bg"
-                android:textColor="@android:color/white"
+                android:background="@drawable/login_btn_bg"
+                android:textColor="@color/indexer_text_color"
                 android:text="登录"
                 android:textSize="18sp"
                 />
@@ -135,7 +139,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="其它账号登录"
-                android:textColor="@color/login_text_color"
+                android:textColor="@color/indexer_text_color"
                 android:paddingTop="10dp"
                 android:paddingLeft="10dp"
                 android:paddingBottom="10dp"

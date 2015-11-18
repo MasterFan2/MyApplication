@@ -49,6 +49,16 @@ public class Member implements Comparable<Member> {
 
     private String pinyin;
 
+    private int isScheduleScreen;
+
+    public int getIsScheduleScreen() {
+        return isScheduleScreen;
+    }
+
+    public void setIsScheduleScreen(int isScheduleScreen) {
+        this.isScheduleScreen = isScheduleScreen;
+    }
+
     public String getPinyin() {
         return pinyin;
     }

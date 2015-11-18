@@ -27,7 +27,7 @@
             app:tabIndicatorHeight="3dp"
             app:tabMode="fixed"
             app:tabSelectedTextColor="@color/indexer_text_color"
-            app:tabTextColor="@color/indexer_text_color"
+            app:tabTextColor="@color/gray_600"
             />
     </LinearLayout>
 

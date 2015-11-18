@@ -28,17 +28,16 @@ import retrofit.http.Query;
  */
 public class HttpClient {
 
-    private static final String PREFIX  = "http://";
-    private static final String END     = "/api";
+    private static final String PREFIX = "http://";
+    private static final String END = "/api";
 
-        private static final String URL     = "bfjs.f3322.net";//本地服务器
-    //    private static final String URL     = "cd.jsbn.com";//开发服务器
+    //private static final String URL     = "bfjs.f3322.net";//本地服务器
+    //private static final String URL     = "cd.jsbn.com";//开发服务器
+    private static final String URL = "jsbn4djg.jsbn.com";
 
-    // 服务器地址信息
-//    private static final String URL = "app.jsbn.com";//正式服务器
-
-    private static final String BASE_URL= PREFIX + URL + END;
-
+    //服务器地址信息
+    //private static final String URL = "app.jsbn.love";//正式服务器
+    private static final String BASE_URL = PREFIX + URL + END;
 
     private Context mContext;
     private RestAdapter restAdapter = null;
@@ -99,30 +98,30 @@ public class HttpClient {
         //修改密码
         @FormUrlEncoded
         @POST("/business/person/updatePassWord")
-        void updatePassword(@Field("newPassword")String uname, @Field("oldPassword")String pwd, Callback<BaseEntity> cb);
+        void updatePassword(@Field("newPassword") String uname, @Field("oldPassword") String pwd, Callback<BaseEntity> cb);
 
         //检查更新
         @GET("/app/upgrade")
-        void upgradeCheck(@Query("appType")int appType, @Query("appVersion")String appVersion, @Query("applicableUsers")int applicableUsers, Callback<Version> cb);
+        void upgradeCheck(@Query("appType") int appType, @Query("appVersion") String appVersion, @Query("applicableUsers") int applicableUsers, Callback<Version> cb);
 
         //占用档期
         @FormUrlEncoded
         @POST("/schedule/{personId}/update")
-        void usedSchedule(@Field("startScreenDate")String startScreenDate, @Field("endScreenDate")String endScreenDate, @Path("personId")int personId, @Field("remark")String remark, Callback<BaseEntity> cb);
+        void usedSchedule(@Field("startScreenDate") String startScreenDate, @Field("endScreenDate") String endScreenDate, @Path("personId") int personId, @Field("remark") String remark, Callback<BaseEntity> cb);
 
         //释放档期
         @FormUrlEncoded
         @POST("/schedule/{personId}/relase")
-        void releaseSchedule(@Path("personId")int personId, @Field("lockDate")String lockDate, Callback<BaseEntity> cb);
+        void releaseSchedule(@Path("personId") int personId, @Field("lockDate") String lockDate, Callback<BaseEntity> cb);
 
         //档期查询
         @GET("/schedule/{personId}")
-        void getSchedules(@Path("personId")int personId, Callback<ScheduleResp> cb);
+        void getSchedules(@Path("personId") int personId, Callback<ScheduleResp> cb);
 
         //修改备注
         @FormUrlEncoded
         @POST("/schedule/{personId}/remark")
-        void remarkSchedule(@Path("personId")int personId, @Field("lockDate")String lockDate, @Field("remark")String remark, Callback<BaseEntity> cb);
+        void remarkSchedule(@Path("personId") int personId, @Field("lockDate") String lockDate, @Field("remark") String remark, Callback<BaseEntity> cb);
 
         //收银员获取所有档期
         @GET("/schedule/allPreparedList")
@@ -144,7 +143,9 @@ public class HttpClient {
         @GET("/schedule/screenFourKing")
         void plannerScheduleF4(@Query("tcsPersonId") int tcsPersonId, @Query("personId") int personId, @Query("lockDate") String lockDate, @Query("remark") String remark, Callback<BaseEntity> cb);
 
-
+        //统筹师释放档期
+        @GET("/schedule/cancelPreparedFKPerson")
+        void cancelPlannerSchedule(@Query("scheduleId") int scheduleId, Callback<BaseEntity> cb);
     }
 
 
@@ -181,66 +182,72 @@ public class HttpClient {
      * @param applicableUsers
      * @param cb
      */
-    public void upgradeCheck(int appType, String appVersion, int applicableUsers, Callback<Version> cb){
+    public void upgradeCheck(int appType, String appVersion, int applicableUsers, Callback<Version> cb) {
         netInterface.upgradeCheck(appType, appVersion, applicableUsers, cb);
     }
 
     /**
      * 占用档期
+     *
      * @param startScreenDate
      * @param endScreenDate
      * @param personId
      * @param remark
      * @param cb
      */
-    public void usedSchedule(String startScreenDate, String endScreenDate, int personId, String remark, Callback<BaseEntity> cb){
+    public void usedSchedule(String startScreenDate, String endScreenDate, int personId, String remark, Callback<BaseEntity> cb) {
         netInterface.usedSchedule(startScreenDate, endScreenDate, personId, remark, cb);
     }
 
     /**
      * 释放档期
+     *
      * @param personId
      * @param lockDate
      * @param cb
      */
-    public void releaseSchedule(int personId, String lockDate, Callback<BaseEntity> cb){
+    public void releaseSchedule(int personId, String lockDate, Callback<BaseEntity> cb) {
         netInterface.releaseSchedule(personId, lockDate, cb);
     }
 
     /**
      * 档期查询
+     *
      * @param personId
      * @param cb
      */
-    public  void getSchedules(int personId, Callback<ScheduleResp> cb){
+    public void getSchedules(int personId, Callback<ScheduleResp> cb) {
         netInterface.getSchedules(personId, cb);
     }
 
     /**
      * 修改备注
+     *
      * @param personId
      * @param lockDate
      * @param remark
      * @param cb
      */
-    public  void remarkSchedule(int personId, String lockDate, String remark, Callback<BaseEntity> cb){
+    public void remarkSchedule(int personId, String lockDate, String remark, Callback<BaseEntity> cb) {
         netInterface.remarkSchedule(personId, lockDate, remark, cb);
     }
 
     /**
      * 收银员获取所有档期
+     *
      * @param cb
      */
-    public void getAllPreparedList(Callback<PlannerResp> cb){
+    public void getAllPreparedList(Callback<PlannerResp> cb) {
         netInterface.getAllPreparedList(cb);
     }
 
     /**
      * 收银员确认档期
+     *
      * @param scheduleId
      * @param cb
      */
-    public void collectMoneyConfirm(@Query("scheduleId") int scheduleId, Callback<BaseEntity> cb){
+    public void collectMoneyConfirm(@Query("scheduleId") int scheduleId, Callback<BaseEntity> cb) {
         netInterface.collectMoneyConfirm(scheduleId, cb);
     }
 
@@ -250,28 +257,39 @@ public class HttpClient {
      * @param username
      * @param cb
      */
-    public void getPersonByPlannerName(String username, Callback<MyMemberResp> cb){
+    public void getPersonByPlannerName(String username, Callback<MyMemberResp> cb) {
         netInterface.getPersonByPlannerName(username, username, cb);
     }
 
 
     /**
-     *根据用户名查询所有管辖人员
+     * 根据用户名查询所有管辖人员
      */
-    public void getPersonByPlannerNameDate(String name, String loadDate, Callback<MyMemberResp> cb){
+    public void getPersonByPlannerNameDate(String name, String loadDate, Callback<MyMemberResp> cb) {
         netInterface.getPersonByPlannerNameDate(name, name, loadDate, cb);
     }
 
 
     /**
      * 统筹师预订四大金刚
+     *
      * @param tcsPersonId
      * @param personId
      * @param lockDate
      * @param remark
      * @param cb
      */
-    public void plannerScheduleF4(@Query("tcsPersonId") int tcsPersonId, @Query("personId") int personId, @Query("lockDate") String lockDate, @Query("remark") String remark, Callback<BaseEntity> cb){
+    public void plannerScheduleF4(@Query("tcsPersonId") int tcsPersonId, @Query("personId") int personId, @Query("lockDate") String lockDate, @Query("remark") String remark, Callback<BaseEntity> cb) {
         netInterface.plannerScheduleF4(tcsPersonId, personId, lockDate, remark, cb);
+    }
+
+    /**
+     * 统筹师释放档期
+     *
+     * @param scheduleId
+     * @param cb
+     */
+    public void cancelPlannerSchedule(@Query("scheduleId") int scheduleId, Callback<BaseEntity> cb) {
+        netInterface.cancelPlannerSchedule(scheduleId, cb);
     }
 }

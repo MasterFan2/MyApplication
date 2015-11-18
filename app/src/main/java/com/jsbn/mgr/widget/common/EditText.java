@@ -184,7 +184,7 @@ public class EditText extends FrameLayout {
                     //ThemeUtil.colorControlNormal(context, 0xFF000000),
                     // ThemeUtil.colorControlActivated(context, 0xFF000000),
                     R.color.gray_500,
-                    R.color.green_line,
+                    R.color.indexer_text_color,
             };
 
             mDividerColors = new ColorStateList(states, colors);

@@ -4,11 +4,14 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.jsbn.mgr.R;
@@ -49,6 +52,9 @@ import retrofit.client.Response;
  */
 @FragmentFeature(layout = R.layout.fragment_calendar)
 public class CalendarFragment extends BaseFragment implements MonthView.OnDaySelected, DatePicker.OnMonthChange, OnClickListener{
+
+    @Bind(R.id.operation_layout)
+    LinearLayout opetationLayout;
 
     @Bind(R.id.pickerView)
     DatePicker picker;
@@ -200,6 +206,11 @@ public class CalendarFragment extends BaseFragment implements MonthView.OnDaySel
                 releaseBtn.setEnabled(true);
                 //查询当前档期
                 getAllSchedules();
+            }else if(baseEntity.getCode() == 3001017) {
+                if(addDescDialog != null && addDescDialog.isShowing()) addDescDialog.dismiss();
+                addDialogDescEdit.setText("");
+                T.s(getActivity(), "该档期已被占用!");
+                getAllSchedules();
             }else {
                 T.s(getActivity(), "操作失败!");
                 usedBtn.setEnabled(true);
@@ -216,11 +227,26 @@ public class CalendarFragment extends BaseFragment implements MonthView.OnDaySel
     @Override
     public void initialize() {
 
-        //
+        //如果是永久屏蔽, 则隐藏操作按钮
+        if(Config.members.getIsScheduleScreen() == 1){
+            opetationLayout.setVisibility(View.INVISIBLE);
+        }else {
+            opetationLayout.setVisibility(View.VISIBLE);
+        }
+
+        //刷新
         picker.setOnRefreshClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getAllSchedules();
+
+                new Handler(){
+                    @Override
+                    public void handleMessage(Message msg) {
+                        picker.refresh();
+                        picker.invalidate();
+                        getAllSchedules();
+                    }
+                }.sendEmptyMessage(0);
             }
         });
 
@@ -244,7 +270,7 @@ public class CalendarFragment extends BaseFragment implements MonthView.OnDaySel
                 .setContentHolder(holder)
                 .setHeader(headView)
                 .setFooter(R.layout.dialog_foot_layout)
-                .setCancelable(true)
+                .setCancelable(false)
                 .setOnClickListener(this)
                 .setGravity(MTDialog.Gravity.TOP)
                 .create();
@@ -418,7 +444,7 @@ public class CalendarFragment extends BaseFragment implements MonthView.OnDaySel
     @Override
     public void onMonthChange(int month) {
         currentMonth = month;
-//        unReleaseAll();
+        picker.refresh();
         getAllSchedules();
     }
 

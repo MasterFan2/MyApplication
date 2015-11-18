@@ -25,6 +25,7 @@ import butterknife.Bind;
 public class HomeActivity extends BaseActivity {
 
     private String[] filters = null;
+    private int[] icons = null;
 
     @Bind(R.id.tab_layout)
     TabLayout tabLayout;
@@ -37,25 +38,63 @@ public class HomeActivity extends BaseActivity {
 
     @Override
     public void initialize() {
-
         if (Config.members.getPersonType() == 1) {
             if (Config.members.getSkillTypeId() == 12) {//收银员
                 filters = new String[]{"待确认", "个人中心"};
                 fragments[0] = CollectMoneyFragment.newInstance("");
-
+                icons = new int[]{R.mipmap.ic_money, R.mipmap.ic_person};
             } else if (Config.members.getSkillTypeId() == 3) {//统筹师
                 filters = new String[]{"四大人员", "个人中心"};
                 fragments[0] = PlannerFragment.newInstance("");
+                icons = new int[]{R.mipmap.ic_planner, R.mipmap.ic_person};
+            }else {
+                fragments = new Fragment[1];
+                filters =  new String[]{"个人中心"};
+                fragments[0]= PersonalFragment.newInstance("");
+                icons = new int[]{R.mipmap.ic_person};
+                fragmentManager = getSupportFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+
+                fragmentTransaction.add(R.id.container, fragments[0]);
+
+                fragmentTransaction.show(fragments[0]).commit();
+
+                for (int i = 0; i < filters.length; i++) {
+                    TabLayout.Tab tab = tabLayout.newTab();
+                    tab.setText(filters[i]);
+                    tab.setIcon(icons[i]);
+                    tabLayout.addTab(tab);
+                }
+
+                tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+                    @Override
+                    public void onTabSelected(TabLayout.Tab tab) {
+                        doFiltrate(tab);
+                    }
+
+                    @Override
+                    public void onTabUnselected(TabLayout.Tab tab) {
+
+                    }
+
+                    @Override
+                    public void onTabReselected(TabLayout.Tab tab) {
+
+                    }
+                });
+                return;
             }
         } else if (Config.members.getPersonType() == 2) {//四大金刚
             fragments[0] = CalendarFragment.newInstance("");
             filters = new String[]{"我的档期", "个人中心"};
+            icons = new int[]{R.mipmap.ic_calendar, R.mipmap.ic_person};
+        }else {
+            fragments[0] = CalendarFragment.newInstance("");
+            filters = new String[]{"我的档期", "个人中心"};
+            icons = new int[]{R.mipmap.ic_calendar, R.mipmap.ic_person};
         }
-//        fragments[0] = CalendarFragment.newInstance("");
-
 
         fragments[1] = PersonalFragment.newInstance("");
-
 
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
@@ -68,9 +107,9 @@ public class HomeActivity extends BaseActivity {
         for (int i = 0; i < filters.length; i++) {
             TabLayout.Tab tab = tabLayout.newTab();
             tab.setText(filters[i]);
+            tab.setIcon(icons[i]);
             tabLayout.addTab(tab);
         }
-
 
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -107,7 +146,6 @@ public class HomeActivity extends BaseActivity {
 
     @Override
     public boolean onKeydown() {
-
         //
         if (currentSelectName.equals(filters[0])) {
             if(fragments[0] instanceof CalendarFragment) {

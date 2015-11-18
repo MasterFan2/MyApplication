@@ -22,6 +22,8 @@ import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.Scroller;
 
+import com.jsbn.mgr.utils.S;
+import com.jsbn.mgr.utils.T;
 import com.jsbn.mgr.widget.datepicker.bizs.calendars.DPCManager;
 import com.jsbn.mgr.widget.datepicker.bizs.decors.DPDecor;
 import com.jsbn.mgr.widget.datepicker.bizs.themes.DPTManager;
@@ -124,6 +126,12 @@ public class MonthView extends View {
 //        }
 //        invalidate();
 //    }
+
+    public void refresh(){
+        selfUsed.clear();
+        jsbnOrder.clear();
+        jsbnUsed.clear();
+    }
 
     public MonthView(Context context) {
         super(context);
@@ -447,12 +455,13 @@ public class MonthView extends View {
     protected void onDraw(Canvas canvas) {
 
         canvas.drawColor(mTManager.colorBG());
-        draw(canvas, width * indexMonth, (indexYear - 1) * height, topYear, topMonth);      //画上
+//        draw(canvas, width * indexMonth, (indexYear - 1) * height, topYear, topMonth);      //画上
         draw(canvas, width * (indexMonth - 1), height * indexYear, leftYear, leftMonth);    //画左
         draw(canvas, width * indexMonth, indexYear * height, centerYear, centerMonth);      //画当前月
         draw(canvas, width * (indexMonth + 1), height * indexYear, rightYear, rightMonth);  //画右
-        draw(canvas, width * indexMonth, (indexYear + 1) * height, bottomYear, bottomMonth);//画下
-
+//        draw(canvas, width * (indexMonth + 2), height * indexYear, rightYear, rightMonth + 1);  //画右1
+//        draw(canvas, width * (indexMonth + 3), height * indexYear, rightYear, rightMonth + 2);  //画右2
+//        draw(canvas, width * indexMonth, (indexYear + 1) * height, bottomYear, bottomMonth);//画下
         drawBGCircle(canvas);
     }
 

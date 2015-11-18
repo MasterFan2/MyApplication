@@ -22,6 +22,7 @@
             android:layout_centerVertical="true"
             android:textSize="15sp" />
         <LinearLayout
+            android:id="@+id/operation_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -46,7 +47,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/white"
-                android:text="释放档期"
+                android:text="取消预定"
                 />
         </LinearLayout>
     </RelativeLayout>

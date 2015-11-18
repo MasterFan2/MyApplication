@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.jsbn.mgr.R;
 import com.jsbn.mgr.widget.datepicker.bizs.decors.DPDecor;
 import com.jsbn.mgr.widget.datepicker.bizs.languages.DPLManager;
 import com.jsbn.mgr.widget.datepicker.bizs.themes.DPTManager;
@@ -138,6 +139,7 @@ public class DatePicker extends LinearLayout {
         tvEnsure.setText("刷新");
         tvEnsure.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 16);
         tvEnsure.setTextColor(mTManager.colorTitle());
+        tvEnsure.setPadding(15, 15, 15, 15);
         tvEnsure.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -210,6 +212,10 @@ public class DatePicker extends LinearLayout {
             month = 12;
         }
         monthView.setDate(year, month);
+    }
+
+    public void refresh(){
+        monthView.refresh();
     }
 
     public void selfChecked(String date){

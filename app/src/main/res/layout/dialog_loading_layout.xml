@@ -24,7 +24,7 @@
             android:layout_marginLeft="8dp"
             android:textColor="@android:color/white"
             android:textSize="17sp"
-            android:text="正在登录中..." />
+            android:text="请稍后 ..." />
     </LinearLayout>
 
 </LinearLayout>

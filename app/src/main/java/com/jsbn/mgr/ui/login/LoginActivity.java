@@ -41,8 +41,8 @@ public class LoginActivity extends BaseActivity {
     @Bind(R.id.login_password_edit)
     EditText passwordEdit;
 
-    @Bind(R.id.toolBar)
-    Toolbar toolbar;
+//    @Bind(R.id.toolBar)
+//    Toolbar toolbar;
 
     @Bind(R.id.login_success_layout)
     LinearLayout headLayout;
@@ -131,7 +131,11 @@ public class LoginActivity extends BaseActivity {
 
             } else if (memberResp.getCode() == 1001011) {
                 T.s(context, "用户名密码错误");
-            } else {
+            } else if(memberResp.getCode() == 1001020){
+                T.s(context, "用户名不存在");
+            }else if(memberResp.getCode() == 500){
+                T.s(context, "服务器错误(code=500)");
+            }else {
                 T.s(context, "登录失败 ");
             }
         }

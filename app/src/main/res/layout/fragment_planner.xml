@@ -65,7 +65,7 @@
             android:gravity="center"
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
-            android:text="筛选档期"
+            android:text="档期筛选"
             android:textColor="@color/indexer_text_color"
             android:textSize="15sp"
             />

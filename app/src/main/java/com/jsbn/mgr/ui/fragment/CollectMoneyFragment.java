@@ -1,14 +1,12 @@
 package com.jsbn.mgr.ui.fragment;
 
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jsbn.mgr.R;
@@ -19,8 +17,6 @@ import com.jsbn.mgr.net.entity.PlannerResp;
 import com.jsbn.mgr.ui.base.BaseFragment;
 import com.jsbn.mgr.ui.base.FragmentFeature;
 import com.jsbn.mgr.ui.base.OnRecyclerItemClickListener;
-import com.jsbn.mgr.utils.InputMethodUtil;
-import com.jsbn.mgr.utils.S;
 import com.jsbn.mgr.utils.T;
 import com.jsbn.mgr.widget.MaterialRippleLayout;
 import com.jsbn.mgr.widget.dialog.MTDialog;
@@ -41,16 +37,21 @@ import retrofit.client.Response;
  * Created by 13510 on 2015/11/10.
  */
 @FragmentFeature(layout = R.layout.fragment_collect_money)
-public class CollectMoneyFragment extends BaseFragment implements OnRecyclerItemClickListener , OnClickListener {
+public class CollectMoneyFragment extends BaseFragment implements OnRecyclerItemClickListener, OnClickListener,  SwipeRefreshLayout.OnRefreshListener {
 
     private List<Planner> dataList;
+
+    @Bind(R.id.refreshLayout)
+    SwipeRefreshLayout refreshLayout;
 
     @Bind(R.id.recyclerView)
     RecyclerView recyclerView;
     private MyAdapter adapter;
 
     private MTDialog dialog;
-    private WaitDialog waitDialog ;
+    private WaitDialog waitDialog;
+
+    private TextView tipsTxt;
 
     public static CollectMoneyFragment newInstance(String... params) {
         CollectMoneyFragment fragment = new CollectMoneyFragment();
@@ -61,12 +62,14 @@ public class CollectMoneyFragment extends BaseFragment implements OnRecyclerItem
 
     @Override
     public void initialize() {
+        refreshLayout.setOnRefreshListener(this);
 
         //init description dialog
         waitDialog = new WaitDialog.Builder(getActivity()).create();
         waitDialog.setCancelable(false);
 
-        View view     = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_collectmoney, null);
+        View view = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_collectmoney, null);
+        tipsTxt = (TextView) view.findViewById(R.id.collect_txt);
         ViewHolder holder = new ViewHolder(view);
         dialog = new MTDialog.Builder(getActivity())
                 .setContentHolder(holder)
@@ -90,7 +93,11 @@ public class CollectMoneyFragment extends BaseFragment implements OnRecyclerItem
     Callback<PlannerResp> cb = new Callback<PlannerResp>() {
         @Override
         public void success(PlannerResp plannerResp, Response response) {
-            if(plannerResp.getData() != null && plannerResp.getCode() == 200) {
+            if(isRefresh)  {
+                refreshLayout.setRefreshing(false);
+                isRefresh = false;
+            }
+            if (plannerResp.getData() != null && plannerResp.getCode() == 200) {
                 dataList = plannerResp.getData();
                 adapter.notifyDataSetChanged();
             }
@@ -99,6 +106,10 @@ public class CollectMoneyFragment extends BaseFragment implements OnRecyclerItem
         @Override
         public void failure(RetrofitError error) {
             T.s(getActivity(), "获取数据错误");
+            if(isRefresh)  {
+                refreshLayout.setRefreshing(false);
+                isRefresh = false;
+            }
         }
     };
 
@@ -109,13 +120,14 @@ public class CollectMoneyFragment extends BaseFragment implements OnRecyclerItem
 
     //------------------------
     private int currentPosition = -1;
+
     @Override
     public void onClick(MTDialog dialog, View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.dialog_cancel_Btn:
                 dialog.dismiss();
                 break;
-            case  R.id.dialog_confrim_btn:
+            case R.id.dialog_confrim_btn:
                 dialog.dismiss();
                 waitDialog.show();
                 HttpClient.getInstance().collectMoneyConfirm(dataList.get(currentPosition).getScheduleId(), confirmCallback);
@@ -133,11 +145,20 @@ public class CollectMoneyFragment extends BaseFragment implements OnRecyclerItem
         @Override
         public void success(BaseEntity baseEntity, Response response) {
             waitDialog.dismiss();
-            T.s(getActivity(), "操作成功");
-            if(currentPosition != -1) {
-                dataList.remove(currentPosition);
-                recyclerView.getAdapter().notifyItemRemoved(currentPosition);
-                currentPosition = -1;
+            if(baseEntity.getCode() == 200){
+                T.s(getActivity(), "操作成功");
+                if (currentPosition != -1) {
+                    dataList.remove(currentPosition);
+                    recyclerView.getAdapter().notifyItemRemoved(currentPosition);
+                    currentPosition = -1;
+                }
+            }else if(baseEntity.getCode() == 3001007){
+                T.s(getActivity(), "该订单已被确认");
+                HttpClient.getInstance().getAllPreparedList(cb);
+
+            }else if(baseEntity.getCode() == 3001005){
+                T.s(getActivity(), "该订单已无效");
+                HttpClient.getInstance().getAllPreparedList(cb);
             }
         }
 
@@ -146,6 +167,54 @@ public class CollectMoneyFragment extends BaseFragment implements OnRecyclerItem
             T.s(getActivity(), "操作失败");
         }
     };
+
+
+    /**
+     * 获取小时分
+     *
+     * @param strDate
+     * @return
+     */
+    private String getHHmm(String strDate) {
+        String temp = strDate.split(" ")[1];
+        temp = temp.substring(0, temp.indexOf(":")) + "时" + temp.substring(temp.indexOf(":") + 1, temp.lastIndexOf(":"))+ "分";
+        return temp;
+    }
+
+    /**
+     * 获取月，日
+     *
+     * @param strDate
+     * @return
+     */
+    private String getMMdd(String strDate) {
+        String temp = strDate.split(" ")[0];
+        String MM = temp.substring(temp.indexOf("-") + 1, temp.lastIndexOf("-"));
+        String dd = temp.substring(temp.lastIndexOf("-") + 1, temp.length());
+
+        if (MM.length() == 2) {
+            if (MM.charAt(0) == '0') {
+                MM = String.valueOf(MM.charAt(1));
+            }
+        }
+
+        if (dd.length() == 2) {
+            if (dd.charAt(0) == '0') {
+                dd = String.valueOf(dd.charAt(1));
+            }
+        }
+
+        return MM + "月" + dd + "日";
+    }
+
+    //----------------------------------------
+    private boolean isRefresh = false;
+    @Override
+    public void onRefresh() {
+        //
+        isRefresh = true;
+        HttpClient.getInstance().getAllPreparedList(cb);
+    }
 
     class MyAdapter extends RecyclerView.Adapter<MyAdapter.MViewHolder> {
 
@@ -165,11 +234,12 @@ public class CollectMoneyFragment extends BaseFragment implements OnRecyclerItem
         public void onBindViewHolder(MViewHolder holder, int position) {
             final Planner planner = dataList.get(position);
 //
-            holder.nameTxt.setText(planner.getSkillTypeName() +"：" + planner.getName());
-            holder.dateTxt.setText("日期：" + planner.getLockDate());
+            holder.nameTxt.setText(planner.getSkillTypeName() + "：" + planner.getName());
+
+            holder.dateTxt.setText("预定日期：" + getMMdd(planner.getLockDate()));
             holder.plannerNameTxt.setText("统筹师：" + planner.getTcsPersonName());
-            holder.plannerDateTxt.setText("日期：" + planner.getTcsPrepareDate());
-            holder.descTxt.setText("备注:" + planner.getRemark());
+            holder.plannerDateTxt.setText("锁定时间：" + getHHmm(planner.getTcsPrepareDate()));
+            holder.descTxt.setText("备注：" + planner.getRemark());
 
 //            //加载内容
 //            if (!TextUtils.isEmpty(planner.getHeadUrl())) {
@@ -213,8 +283,10 @@ public class CollectMoneyFragment extends BaseFragment implements OnRecyclerItem
                 confirmLayout.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        dialog.show();
                         currentPosition = getLayoutPosition();
+                        final Planner planner = dataList.get(currentPosition);
+                        tipsTxt.setText("锁定("+planner.getSkillTypeName() + "：" + planner.getName()+")的订单，请确认");
+                        dialog.show();
                     }
                 });
             }

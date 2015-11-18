@@ -6,12 +6,14 @@
     android:orientation="vertical"
     android:background="@color/gray_400"
     >
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolBar"
+    <com.jsbn.mgr.widget.masterfan.MasterTitleView
+        android:id="@+id/titleView"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/gray_900"
-        app:title="我的成员"
+        app:titleBackground="@color/gray_900"
+        app:titleText="我的组员"
+        app:titleTxtColor="@android:color/white"
+        app:rightButtonHide="true"
         />
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"

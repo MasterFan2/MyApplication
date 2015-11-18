@@ -27,15 +27,23 @@ public class UpdatePwdActivity extends BaseActivity {
     @Bind(R.id.update_newPwd_edit)
     EditText newPwdEdit;
 
+    @Bind(R.id.update_confirmPwd_edit)
+    EditText confirmEdit;
+
     @Bind(R.id.update_btn)
     Button updateBtn;
 
+    @OnClick(R.id.m_title_left_btn)
+    public void back() {
+        animFinish();
+    }
+
     @OnClick(R.id.update_btn)
     public void update(View view) {
-
         view.setEnabled(false);
         String oldPwd = oldPwdEdit.getText().toString();
         String newPwd = newPwdEdit.getText().toString();
+        String confirmPwd = confirmEdit.getText().toString();
 
         if (TextUtils.isEmpty(oldPwd)) {
             oldPwdEdit.setError("请输入旧密码");
@@ -45,6 +53,7 @@ public class UpdatePwdActivity extends BaseActivity {
             oldPwdEdit.clearError();
         }
 
+        //
         if (TextUtils.isEmpty(newPwd)) {
             newPwdEdit.setError("请输入新密码");
             view.setEnabled(true);
@@ -57,6 +66,26 @@ public class UpdatePwdActivity extends BaseActivity {
             return;
         }
         newPwdEdit.clearError();
+
+        //
+        if (TextUtils.isEmpty(confirmPwd)) {
+            confirmEdit.setError("请输入确认密码");
+            view.setEnabled(true);
+            return;
+        }
+
+        if (confirmPwd.length() < 6) {
+            confirmEdit.setError("确认密码长度在六位以上.");
+            view.setEnabled(true);
+            return;
+        }
+
+        if (!newPwd.equals(confirmPwd)){
+            confirmEdit.setError("新密码和确认密码不一致,请检查.");
+            view.setEnabled(true);
+            return;
+        }
+        confirmEdit.clearError();
 
         //
         HttpClient.getInstance().updatePassword(newPwd, oldPwd, cb);

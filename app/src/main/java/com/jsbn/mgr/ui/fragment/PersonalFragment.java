@@ -45,8 +45,8 @@ public class PersonalFragment extends BaseFragment {
     @Bind(R.id.logoutBtn)
     Button logoutBtn;
 
-    @Bind(R.id.head_img)
-    ImageView headImg;
+//    @Bind(R.id.head_img)
+//    ImageView headImg;
 
     private Member member;
 
@@ -85,9 +85,9 @@ public class PersonalFragment extends BaseFragment {
                 myTeamTxt.setVisibility(View.GONE);
             }
 
-            if(!TextUtils.isEmpty(member.getHeadUrl())) {
-                Picasso.with(getActivity()).load(member.getHeadUrl()).into(headImg);
-            }
+//            if(!TextUtils.isEmpty(member.getHeadUrl())) {
+//                Picasso.with(getActivity()).load(member.getHeadUrl()).into(headImg);
+//            }
         }
     }
 

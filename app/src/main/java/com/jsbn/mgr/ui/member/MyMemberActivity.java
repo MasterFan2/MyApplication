@@ -31,6 +31,7 @@ import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
@@ -38,8 +39,8 @@ import retrofit.client.Response;
 @ActivityFeature(layout = R.layout.activity_my_member)
 public class MyMemberActivity extends BaseActivity implements OnRecyclerItemClickListener{
 
-    @Bind(R.id.toolBar)
-    Toolbar toolbar;
+//    @Bind(R.id.toolBar)
+//    Toolbar toolbar;
 
     @Bind(R.id.recyclerView)
     RecyclerView recyclerView;
@@ -49,9 +50,14 @@ public class MyMemberActivity extends BaseActivity implements OnRecyclerItemClic
 
     private ArrayList<Member> dataList = null;
 
+    @OnClick(R.id.m_title_left_btn)
+    public void back() {
+        animFinish();
+    }
+
     @Override
     public void initialize() {
-        setSupportActionBar(toolbar);
+//        setSupportActionBar(toolbar);
 //        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         dialog = new WaitDialog.Builder(context).create();
@@ -60,7 +66,7 @@ public class MyMemberActivity extends BaseActivity implements OnRecyclerItemClic
         LinearLayoutManager layoutManager = new LinearLayoutManager(context);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
-        toolbar.setSubtitle("点击可查看档期");
+//        toolbar.setSubtitle("点击可查看档期");
         adapter = new MyAdapter(MyMemberActivity.this);
         recyclerView.setAdapter(adapter);
 
@@ -113,9 +119,9 @@ public class MyMemberActivity extends BaseActivity implements OnRecyclerItemClic
             holder.professionTxt.setText("职业：" + member.getSkillTypeName());
 
             //加载内容
-            if(!TextUtils.isEmpty(member.getHeadUrl())){
-                Picasso.with(context).load(member.getHeadUrl()).error(getResources().getDrawable(R.mipmap.ic_launcher)).into(holder.headImg);
-            }
+//            if(!TextUtils.isEmpty(member.getHeadUrl())){
+//                Picasso.with(context).load(member.getHeadUrl()).error(getResources().getDrawable(R.mipmap.ic_launcher)).into(holder.headImg);
+//            }
         }
 
         @Override

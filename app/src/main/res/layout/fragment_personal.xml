@@ -7,83 +7,82 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/gray_200"
+        android:background="@android:color/white"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:background="@android:color/white"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:padding="16dp">
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="20dp"-->
+            <!--android:background="@android:color/white"-->
+            <!--android:gravity="center_vertical"-->
+            <!--android:orientation="horizontal"-->
+            <!--android:padding="16dp">-->
 
-            <ImageView
-                android:id="@+id/head_img"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:src="@mipmap/ic_launcher" />
+            <!--<ImageView-->
+                <!--android:id="@+id/head_img"-->
+                <!--android:layout_width="80dp"-->
+                <!--android:layout_height="80dp"-->
+                <!--android:visibility="gone"-->
+                <!--android:src="@mipmap/ic_launcher" />-->
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:gravity="center_vertical"
-                android:orientation="vertical"
-                android:padding="5dp">
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:gravity="center_vertical"-->
+                <!--android:orientation="vertical"-->
+                <!--android:padding="5dp">-->
 
-                <TextView
-                    android:id="@+id/name_txt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="姓名：-"
-                    android:textColor="@color/gray_800" />
-
-                <TextView
-                    android:id="@+id/profession_txt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="职业：-"
-                    android:textColor="@color/gray_600" />
-
-                <TextView
-                    android:id="@+id/gender_txt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="性别：-"
-                    android:textColor="@color/gray_600" />
-            </LinearLayout>
-        </LinearLayout>
+               <!-- -->
+            <!--</LinearLayout>-->
+        <!--</LinearLayout>-->
         <!-- end head -->
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.15dp"
+            android:background="@color/gray_400"
+            android:layout_marginTop="10dp"
+            />
+        <TextView
+            android:id="@+id/name_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="姓名：-"
+            android:padding="16dp"
+            android:textColor="@color/gray_800" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.15dp"
+            android:background="@color/gray_400"
+            />
+        <TextView
+            android:id="@+id/profession_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="职业：-"
+            android:padding="16dp"
+            android:textColor="@color/gray_600" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.15dp"
+            android:background="@color/gray_400"
+            />
+        <TextView
+            android:id="@+id/gender_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="性别：-"
+            android:padding="16dp"
+            android:textColor="@color/gray_600" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.15dp"
+            android:background="@color/gray_400"
+            />
         <com.jsbn.mgr.widget.MaterialRippleLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            app:rippleAlpha="0.1"
-            app:rippleColor="@color/gray_100"
-            app:rippleDelayClick="false"
-            app:rippleHover="true"
-            app:rippleOverlay="true">
-
-            <TextView
-                android:id="@+id/memberTxt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:color/white"
-                android:drawableRight="@mipmap/ic_arrow_right"
-                android:gravity="center_vertical"
-                android:padding="16dp"
-                android:text="我的组员" />
-        </com.jsbn.mgr.widget.MaterialRippleLayout>
-
-        <com.jsbn.mgr.widget.MaterialRippleLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
             app:rippleAlpha="0.1"
             app:rippleColor="@color/gray_100"
             app:rippleDelayClick="false"
@@ -100,6 +99,36 @@
                 android:padding="16dp"
                 android:text="修改密码" />
         </com.jsbn.mgr.widget.MaterialRippleLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.15dp"
+            android:background="@color/gray_400"
+            />
+        <com.jsbn.mgr.widget.MaterialRippleLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:rippleAlpha="0.1"
+            app:rippleColor="@color/gray_100"
+            app:rippleDelayClick="false"
+            app:rippleHover="true"
+            app:rippleOverlay="true">
+
+            <TextView
+                android:id="@+id/memberTxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white"
+                android:drawableRight="@mipmap/ic_arrow_right"
+                android:gravity="center_vertical"
+                android:padding="16dp"
+                android:text="我的组员" />
+        </com.jsbn.mgr.widget.MaterialRippleLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.15dp"
+            android:background="@color/gray_400"
+            />
+
 
         <com.jsbn.mgr.widget.MaterialRippleLayout
             android:layout_width="match_parent"
