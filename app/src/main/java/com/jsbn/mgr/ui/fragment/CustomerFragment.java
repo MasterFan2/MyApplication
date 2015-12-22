@@ -20,6 +20,7 @@ import android.widget.TextView;
 import com.jsbn.mgr.R;
 import com.jsbn.mgr.config.Config;
 import com.jsbn.mgr.net.HttpClient;
+import com.jsbn.mgr.net.entity.Base;
 import com.jsbn.mgr.net.entity.Customer;
 import com.jsbn.mgr.net.entity.Member;
 import com.jsbn.mgr.ui.base.BaseFragment;
@@ -47,6 +48,9 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 /**
  * 我的客户
@@ -55,10 +59,10 @@ import butterknife.OnClick;
 @FragmentFeature(layout = R.layout.fragment_customer)
 public class CustomerFragment extends BaseFragment implements OnRecyclerItemClickListener {
 
+
     private List<Customer> dataList;
     private MyAdapter adapter;
     private DbUtils db;
-
 
     private String strSelctedDate = "";
 
@@ -148,10 +152,10 @@ public class CustomerFragment extends BaseFragment implements OnRecyclerItemClic
 
                 for (Customer member : dataList) {
                     if (member.getBridegroomName().contains(s) || member.getBridegroomName().equalsIgnoreCase(s.toString()) ||
-                            member.getBrideName().contains(s)  || member.getBrideName().equals(s.toString()) ||
+                            member.getBrideName().contains(s) || member.getBrideName().equals(s.toString()) ||
                             member.getBridegroomPhone().contains(s) || member.getBridegroomPhone().equals(s) ||
                             member.getBridePhone().contains(s) || member.getBridePhone().equals(s) ||
-                            member.getHotel().contains(s) || member.getHotel().equals(s)             ) {
+                            member.getHotel().contains(s) || member.getHotel().equals(s)) {
                         memberTempList.add(member);
                     }
                 }
@@ -183,7 +187,26 @@ public class CustomerFragment extends BaseFragment implements OnRecyclerItemClic
                 }
             }
         });
+
+        //获取客户列表
+        HttpClient.getInstance().customerList(cb);
     }
+
+    private Callback<Base<List<Customer>>> cb = new Callback<Base<List<Customer>>>() {
+        @Override
+        public void success(Base<List<Customer>> listBase, Response response) {
+            if(listBase.getCode()  == 200){
+                S.o(":::success !");
+            }else{
+
+            }
+        }
+
+        @Override
+        public void failure(RetrofitError error) {
+
+        }
+    };
 
     @Override
     public void onResume() {
