@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
  */
 public class MatcherUtil {
     public static boolean isPhone(String phone) {
-        String check = "^(13[4,5,6,7,8,9]|15[0,8,9,1,7]|18[7,8,9]|177)\\d{8}$"; //手机验证
+        String check = "^(13[0,1,2,3,4,5,6,7,8,9]|15[0,8,9,1,2,3,4,5,6,7]|18[0,1,2,3,4,5,6,7,8,9]|177|170)\\d{8}$"; //手机验证
         Pattern p = Pattern.compile(check);
         Matcher m = p.matcher(phone);
         return m.find();

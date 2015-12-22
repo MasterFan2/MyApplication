@@ -13,6 +13,7 @@ import com.jsbn.mgr.ui.base.ActivityFeature;
 import com.jsbn.mgr.ui.base.BaseActivity;
 import com.jsbn.mgr.ui.fragment.CalendarFragment;
 import com.jsbn.mgr.ui.fragment.CollectMoneyFragment;
+import com.jsbn.mgr.ui.fragment.CustomerFragment;
 import com.jsbn.mgr.ui.fragment.PersonalFragment;
 import com.jsbn.mgr.ui.fragment.PlannerFragment;
 
@@ -44,8 +45,8 @@ public class HomeActivity extends BaseActivity {
                 fragments[0] = CollectMoneyFragment.newInstance("");
                 icons = new int[]{R.mipmap.ic_money, R.mipmap.ic_person};
             } else if (Config.members.getSkillTypeId() == 3) {//统筹师
-                filters = new String[]{"四大人员", "个人中心"};
-                fragments[0] = PlannerFragment.newInstance("");
+                filters = new String[]{"客户列表", "个人中心"};
+                fragments[0] = CustomerFragment.newInstance("");
                 icons = new int[]{R.mipmap.ic_planner, R.mipmap.ic_person};
             }else {
                 fragments = new Fragment[1];

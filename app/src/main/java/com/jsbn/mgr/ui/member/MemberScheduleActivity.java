@@ -20,6 +20,7 @@ import com.jsbn.mgr.net.entity.Schedule;
 import com.jsbn.mgr.net.entity.ScheduleResp;
 import com.jsbn.mgr.ui.base.ActivityFeature;
 import com.jsbn.mgr.ui.base.BaseActivity;
+import com.jsbn.mgr.utils.DateUtil;
 import com.jsbn.mgr.utils.InputMethodUtil;
 import com.jsbn.mgr.utils.T;
 import com.jsbn.mgr.widget.common.EditText;
@@ -114,7 +115,7 @@ public class MemberScheduleActivity extends BaseActivity implements MonthView.On
 
         View dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_loading_layout, null);
         dialog = new AlertDialog.Builder(context).setView(dialogView).setCancelable(false).create();
-
+        releaseBtn.setText("释放档期");
         usedBtn.setEnabled(false);
         releaseBtn.setEnabled(false);
         remarkBtn.setEnabled(false);
@@ -238,6 +239,9 @@ public class MemberScheduleActivity extends BaseActivity implements MonthView.On
         releaseBtn.setEnabled(false);
         remarkBtn.setEnabled(false);
         selectedDay = dd;
+
+        selectTxt.setText(dd);//设置选中的日期
+
         if(TextUtils.isEmpty(dd)) {
             usedBtn.setEnabled(false);
             releaseBtn.setEnabled(false);
@@ -246,7 +250,10 @@ public class MemberScheduleActivity extends BaseActivity implements MonthView.On
             return;
         }
 
-        selectTxt.setText(dd);
+        if(!DateUtil.isAfterToday(selectedDay)){
+            usedBtn.setEnabled(false);
+            return;
+        }
 
         if(usedBtn.isEnabled() == false){
             usedBtn.setEnabled(true);
@@ -294,6 +301,12 @@ public class MemberScheduleActivity extends BaseActivity implements MonthView.On
 
     @Override
     public void onMonthChange(int month) {
+        if(currentMonth == 12 && month == 1){
+            currentYear += 1;
+        }
+        if(currentMonth == 1 && month == 12){
+            currentYear -= 1;
+        }
         currentMonth = month;
         picker.refresh();
         getAllSchedules();

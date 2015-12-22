@@ -6,6 +6,7 @@ import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -22,6 +23,7 @@ import com.jsbn.mgr.net.entity.Schedule;
 import com.jsbn.mgr.net.entity.ScheduleResp;
 import com.jsbn.mgr.ui.base.BaseFragment;
 import com.jsbn.mgr.ui.base.FragmentFeature;
+import com.jsbn.mgr.utils.DateUtil;
 import com.jsbn.mgr.utils.InputMethodUtil;
 import com.jsbn.mgr.utils.T;
 import com.jsbn.mgr.widget.common.EditText;
@@ -97,9 +99,6 @@ public class CalendarFragment extends BaseFragment implements MonthView.OnDaySel
 
 
     //---------------记录有减少时清除元素------------------
-    private ArrayList<String> selfArrs      = null;//new ArrayList<>();
-    private ArrayList<String> jsbnUsedArrs  = null;//new ArrayList<>();
-    private ArrayList<String> jsbnOrderArrs = null;//new ArrayList<>();
 
     /**
      * create new.
@@ -186,11 +185,15 @@ public class CalendarFragment extends BaseFragment implements MonthView.OnDaySel
 
     @OnClick(R.id.self_used_btn)
     public void selfUsed(View view){
-        isAddDesc = true;
-        addDialogDescTxt.setText("日期：" + selectedDay);
-        addDialogHeadTxt.setText("占用档期");
-        addDescDialog.show();
-        view.setEnabled(false);
+        if(DateUtil.isAfterToday(selectedDay)){
+            isAddDesc = true;
+            addDialogDescTxt.setText("日期：" + selectedDay);
+            addDialogHeadTxt.setText("占用档期");
+            addDescDialog.show();
+            view.setEnabled(false);
+        }else {
+            Snackbar.make(view, "请选择正确的日期, 必须是今天或之后的日期", Snackbar.LENGTH_LONG).show();
+        }
     }
 
     private Callback<BaseEntity> usedScheduleCallback = new Callback<BaseEntity>() {
@@ -317,7 +320,6 @@ public class CalendarFragment extends BaseFragment implements MonthView.OnDaySel
         picker.setDate(year, month);
 
         //查询当前档期
-//        getAllSchedules();
     }
 
     private Callback<ScheduleResp> cb = new Callback<ScheduleResp>() {
@@ -339,7 +341,6 @@ public class CalendarFragment extends BaseFragment implements MonthView.OnDaySel
                         if(currentMonth == month && currentYear == year){
                             date = year + "-" + month + "-" + day;
                             if(schedule.getStatusId() == 4) {
-
 //                                for (picker.getSelfUsed().keySet())
                                 picker.selfChecked(date);
                             }
@@ -395,6 +396,9 @@ public class CalendarFragment extends BaseFragment implements MonthView.OnDaySel
         releaseBtn.setEnabled(false);
         remarkBtn.setEnabled(false);
         selectedDay = dd;
+
+        selectTxt.setText(dd);
+
         if(TextUtils.isEmpty(dd)) {
             usedBtn.setEnabled(false);
             releaseBtn.setEnabled(false);
@@ -404,7 +408,10 @@ public class CalendarFragment extends BaseFragment implements MonthView.OnDaySel
             return;
         }
 
-        selectTxt.setText(dd);
+        if(!DateUtil.isAfterToday(selectedDay)){
+            usedBtn.setEnabled(false);
+            return;
+        }
 
         if(usedBtn.isEnabled() == false){
             usedBtn.setEnabled(true);
@@ -443,6 +450,12 @@ public class CalendarFragment extends BaseFragment implements MonthView.OnDaySel
 
     @Override
     public void onMonthChange(int month) {
+        if(currentMonth == 12 && month == 1){
+            currentYear += 1;
+        }
+        if(currentMonth == 1 && month == 12){
+            currentYear -= 1;
+        }
         currentMonth = month;
         picker.refresh();
         getAllSchedules();

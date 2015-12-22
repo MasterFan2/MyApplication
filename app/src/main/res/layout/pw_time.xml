@@ -27,7 +27,7 @@
             android:background="@android:color/transparent"
             android:gravity="center"
             android:layout_centerInParent="true"
-            android:text="清除筛选"
+            android:text="删除筛选"
             android:textColor="@drawable/wheel_timebtn"/>
         <Button
             android:id="@+id/btnSubmit"

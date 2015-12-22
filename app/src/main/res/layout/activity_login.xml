@@ -1,150 +1,189 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:clipToPadding="true"
-    android:fitsSystemWindows="true"
-    android:orientation="vertical"
     >
-
-    <com.jsbn.mgr.widget.masterfan.MasterTitleView
-        android:id="@+id/titleView"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        app:titleBackground="@color/gray_900"
-        app:titleText="登录"
-        app:titleTxtColor="@android:color/white"
-        app:rightButtonHide="true"
-        app:leftButtonHide="true"
-        />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#eeeeee"
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true"
         android:orientation="vertical"
-        android:padding="16dp"
-        android:background="@android:color/white"
         >
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical"
+            android:padding="16dp"
             >
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="50dp"
                 >
-                <com.jsbn.mgr.widget.common.EditText
-                    android:id="@+id/login_account_edit"
-                    style="@style/Material.Widget.EditText.Light"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:et_dividerPadding="8dp"
-                    app:et_supportPadding="5dp"
-                    app:et_dividerHeight="1dp"
-                    android:textCursorDrawable="@null"
-                    android:hint="用户名/手机号"
-                    android:textColorHint="@color/gray_500"
-                    android:inputType="text"
-                    android:text=""
-                    android:textSize="14sp"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
-                    android:textColor="#FF000000"
-                    app:et_dividerErrorColor="#FFFF0000"
-                    app:et_dividerColor="@color/edit_text_line_state"
-                    app:et_helper=""
-                    app:et_inputId="@+id/textfield_et_helper_input"
-                    app:et_labelTextColor="@drawable/color_label"
-                    app:et_supportMode="helper"
-                    app:et_supportTextErrorColor="#FFFF0000" />
-                <LinearLayout
-                    android:id="@+id/login_success_layout"
+                <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
+                    android:src="@mipmap/logo"
                     android:layout_centerHorizontal="true"
-                    android:gravity="center"
-                    android:visibility="gone"
+                    />
+            </RelativeLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
                     >
-                    <com.jsbn.mgr.widget.imageview.SimpleTagImageView
-                        android:id="@+id/login_success_head_img"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        app:simple_tag_round_radius="8dp"
-                        android:scaleType="centerCrop"
-                        app:simple_tag_enable="false"
-                        android:visibility="gone"
+
+                    <EditText
+                        android:id="@+id/login_account_edit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="用户名"
+                        android:textColorHint="@color/login_main_color"
+                        android:background="@drawable/n_login_input"
+                        android:padding="10dp"
+                        android:singleLine="true"
+                        android:textColor="@color/gray_900"
                         />
-                    <TextView
-                        android:id="@+id/login_success_account_txt"
-                        android:layout_marginTop="10dp"
+
+                    <!--<com.jsbn.mgr.widget.common.EditText-->
+                    <!--android:id="@+id/login_account_edit"-->
+                    <!--style="@style/Material.Widget.EditText.Light"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:hint="用户名/手机号"-->
+                    <!--android:inputType="text"-->
+                    <!--android:text=""-->
+                    <!--android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"-->
+                    <!--android:textColor="#FF000000"-->
+                    <!--android:textColorHint="@color/gray_500"-->
+                    <!--android:textCursorDrawable="@null"-->
+                    <!--android:textSize="14sp"-->
+                    <!--app:et_dividerColor="@color/edit_text_line_state"-->
+                    <!--app:et_dividerErrorColor="#FFFF0000"-->
+                    <!--app:et_dividerHeight="1dp"-->
+                    <!--app:et_dividerPadding="8dp"-->
+                    <!--app:et_helper=""-->
+                    <!--app:et_inputId="@+id/textfield_et_helper_input"-->
+                    <!--app:et_labelTextColor="@drawable/color_label"-->
+                    <!--app:et_supportMode="helper"-->
+                    <!--app:et_supportPadding="5dp"-->
+                    <!--app:et_supportTextErrorColor="#FFFF0000"/>-->
+
+                    <LinearLayout
+                        android:id="@+id/login_success_layout"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/gray_800"
-                        android:textSize="18sp"
-                        android:text="--"
-                        />
-                </LinearLayout>
+                        android:layout_centerHorizontal="true"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:visibility="gone"
+                        >
 
-            </RelativeLayout>
+                        <com.jsbn.mgr.widget.imageview.SimpleTagImageView
+                            android:id="@+id/login_success_head_img"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:scaleType="centerCrop"
+                            android:visibility="gone"
+                            app:simple_tag_enable="false"
+                            app:simple_tag_round_radius="8dp"
+                            />
 
-            <com.jsbn.mgr.widget.common.EditText
-                android:id="@+id/login_password_edit"
-                style="@style/Material.Widget.EditText.Light"
+                        <TextView
+                            android:id="@+id/login_success_account_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:text="--"
+                            android:textColor="@color/gray_800"
+                            android:textSize="18sp"
+                            />
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+                <EditText
+                    android:id="@+id/login_password_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="密码"
+                    android:password="true"
+                    android:singleLine="true"
+                    android:textColorHint="@color/login_main_color"
+                    android:background="@drawable/n_login_input"
+                    android:padding="10dp"
+                    android:layout_marginTop="20dp"
+                    android:textColor="@color/gray_900"
+                    />
+                <!--<com.jsbn.mgr.widget.common.EditText-->
+                <!--android:id="@+id/login_password_edit"-->
+                <!--style="@style/Material.Widget.EditText.Light"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="20dp"-->
+                <!--android:hint="密  码 (6位以上)"-->
+                <!--android:inputType="textPassword"-->
+                <!--android:text=""-->
+                <!--android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"-->
+                <!--android:textColor="#FF000000"-->
+                <!--android:textColorHint="@color/login_main_color"-->
+                <!--android:textCursorDrawable="@null"-->
+                <!--android:textSize="14sp"-->
+                <!--app:et_dividerColor="@color/edit_text_line_state"-->
+                <!--app:et_dividerErrorColor="#FFFF0000"-->
+                <!--app:et_dividerHeight="1dp"-->
+                <!--app:et_dividerPadding="8dp"-->
+                <!--app:et_helper=""-->
+                <!--app:et_inputId="@+id/textfield_et_helper_input"-->
+                <!--app:et_labelTextColor="@drawable/color_label"-->
+                <!--app:et_supportMode="helper"-->
+                <!--app:et_supportPadding="5dp"-->
+                <!--app:et_supportTextErrorColor="#FFFF0000"/>-->
+            </LinearLayout>
+
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textCursorDrawable="@null"
-                app:et_dividerPadding="8dp"
-                app:et_supportPadding="5dp"
-                app:et_dividerHeight="1dp"
-                android:textSize="14sp"
-                android:layout_marginTop="20dp"
-                app:et_dividerColor="@color/edit_text_line_state"
-                android:textColorHint="@color/gray_500"
-                android:hint="密  码 (6位以上)"
-                android:inputType="textPassword"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
-                android:textColor="#FF000000"
-                app:et_dividerErrorColor="#FFFF0000"
-                app:et_helper=""
-                android:text=""
-                app:et_inputId="@+id/textfield_et_helper_input"
-                app:et_labelTextColor="@drawable/color_label"
-                app:et_supportMode="helper"
-                app:et_supportTextErrorColor="#FFFF0000" />
-        </LinearLayout>
+                android:layout_marginTop="25dp"
+                android:gravity="right"
+                android:orientation="vertical"
+                >
 
+                <com.jsbn.mgr.widget.common.Button
+                    android:id="@+id/login_login_btn"
+                    style="@style/RaiseColorButtonRippleStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/n_login_btn_bg"
+                    android:text="登录"
+                    android:textColor="@android:color/white"
+                    android:textSize="18sp"
+                    />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="5dp"
-            android:gravity="right"
-            >
-            <com.jsbn.mgr.widget.common.Button
-                style="@style/RaiseColorButtonRippleStyle"
-                android:id="@+id/login_login_btn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/login_btn_bg"
-                android:textColor="@color/indexer_text_color"
-                android:text="登录"
-                android:textSize="18sp"
-                />
-
-            <TextView
-                android:id="@+id/login_otherAccount_txt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="其它账号登录"
-                android:textColor="@color/indexer_text_color"
-                android:paddingTop="10dp"
-                android:paddingLeft="10dp"
-                android:paddingBottom="10dp"
-                />
-            <!--<com.tool.widget.common.Button-->
+                <TextView
+                    android:id="@+id/login_otherAccount_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="10dp"
+                    android:text="其它账号登录"
+                    android:textColor="@color/login_main_color"
+                    />
+                <!--<com.tool.widget.common.Button-->
                 <!--style="@style/FlatButtonRippleStyle"-->
                 <!--android:id="@+id/login_samples_btn"-->
                 <!--android:layout_width="wrap_content"-->
@@ -155,7 +194,7 @@
                 <!--android:paddingRight="10dp"-->
                 <!--android:text="Samples"-->
                 <!--/>-->
-            <!--<com.tool.widget.common.Button-->
+                <!--<com.tool.widget.common.Button-->
                 <!--style="@style/FlatButtonRippleStyle"-->
                 <!--android:id="@+id/login_upgrade_btn"-->
                 <!--android:layout_width="wrap_content"-->
@@ -166,7 +205,18 @@
                 <!--android:paddingRight="10dp"-->
                 <!--android:text="版本更新"-->
                 <!--/>-->
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:layout_marginTop="10dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:textColor="@color/login_main_color"
+        android:text=" @金色百年档期管理软件" />
+</RelativeLayout>
 
-</LinearLayout>

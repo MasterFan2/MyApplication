@@ -40,6 +40,8 @@
 
     <color name="indicator_background">#aa3B3E3F</color>
 
+    <color name="login_main_color">#dbaa4c</color>
+    <color name="login_main_bgcolor">#eeeeee</color>
 
     <color name="green">#45C01A</color>
     <color name="gray">#3B3E3F</color>

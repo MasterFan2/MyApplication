@@ -1,10 +1,10 @@
 package com.jsbn.mgr.ui.login;
 
 import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -13,12 +13,10 @@ import com.jsbn.mgr.config.Config;
 import com.jsbn.mgr.net.HttpClient;
 import com.jsbn.mgr.net.PreferenceUtils;
 import com.jsbn.mgr.net.entity.MemberResp;
-import com.jsbn.mgr.net.entity.Members;
 import com.jsbn.mgr.ui.HomeActivity;
 import com.jsbn.mgr.ui.base.ActivityFeature;
 import com.jsbn.mgr.ui.base.BaseActivity;
 import com.jsbn.mgr.utils.T;
-import com.jsbn.mgr.widget.common.EditText;
 import com.jsbn.mgr.widget.imageview.SimpleTagImageView;
 import com.jsbn.mgr.widget.util.PreUtil;
 import com.squareup.picasso.Picasso;
@@ -83,7 +81,6 @@ public class LoginActivity extends BaseActivity {
                 view.setEnabled(true);
                 return;
             } else {
-                accountEdit.clearError();
             }
         }
 
@@ -100,7 +97,6 @@ public class LoginActivity extends BaseActivity {
             return;
         }
 
-        passwordEdit.clearError();
         HttpClient.getInstance().login(account, password, cb);
         dialog.show();
     }
@@ -149,6 +145,7 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     public void initialize() {
+
         info = PreUtil.getLoginSuccessInfo(context);
         if(info != null){
             headLayout.setVisibility(View.VISIBLE);

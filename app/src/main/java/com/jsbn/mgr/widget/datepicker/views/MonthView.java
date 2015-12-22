@@ -45,9 +45,9 @@ import java.util.Map;
  * @author AigeStudio 2015-06-29
  */
 public class MonthView extends View {
-    private final Region[][] MONTH_REGIONS_4 = new Region[4][7];
-    private final Region[][] MONTH_REGIONS_5 = new Region[5][7];
-    private final Region[][] MONTH_REGIONS_6 = new Region[6][7];
+    private final Region[][] MONTH_REGIONS_4 = new Region[4][7];//位置 4行7列
+    private final Region[][] MONTH_REGIONS_5 = new Region[5][7];//位置 5行7列
+    private final Region[][] MONTH_REGIONS_6 = new Region[6][7];//位置 6行7列
 
     private final DPInfo[][] INFO_4 = new DPInfo[4][7];
     private final DPInfo[][] INFO_5 = new DPInfo[5][7];
@@ -58,8 +58,7 @@ public class MonthView extends View {
     private DPCManager mCManager = DPCManager.getInstance();
     private DPTManager mTManager = DPTManager.getInstance();
 
-    protected Paint mPaint = new Paint(Paint.ANTI_ALIAS_FLAG | Paint.DITHER_FLAG |
-            Paint.LINEAR_TEXT_FLAG);
+    protected Paint mPaint = new Paint(Paint.ANTI_ALIAS_FLAG | Paint.DITHER_FLAG | Paint.LINEAR_TEXT_FLAG);
     private Scroller mScroller;
     private DecelerateInterpolator decelerateInterpolator = new DecelerateInterpolator();
     private AccelerateInterpolator accelerateInterpolator = new AccelerateInterpolator();

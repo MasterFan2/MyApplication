@@ -23,13 +23,14 @@ import java.util.Date;
  * 
  */
 public class TimePopupWindow extends PopupWindow implements OnClickListener {
+
 	public enum Type {
 		ALL, YEAR_MONTH_DAY, HOURS_MINS, MONTH_DAY_HOUR_MIN , YEAR_MONTH
 	}// 四种选择模式，年月日时分，年月日，时分，月日时分
 
 	private View rootView; // 总的布局
 	WheelTime wheelTime;
-	public Button btnSubmit, btnCancel;
+	public Button btnSubmit, btnCancel, btnClear;
 	private static final String TAG_SUBMIT = "submit";
 	private static final String TAG_CANCEL = "cancel";
 	private OnTimeSelectListener timeSelectListener;
@@ -50,8 +51,9 @@ public class TimePopupWindow extends PopupWindow implements OnClickListener {
 		btnCancel = (Button) rootView.findViewById(R.id.btnCancel);
 		btnCancel.setTag(TAG_CANCEL);
 
-		rootView.findViewById(R.id.btnClear).setTag("clear");
-		rootView.findViewById(R.id.btnClear).setOnClickListener(this);
+		btnClear = (Button) rootView.findViewById(R.id.btnClear);
+		btnClear.setTag("clear");
+		btnClear.setOnClickListener(this);
 
 		btnSubmit.setOnClickListener(this);
 		btnCancel.setOnClickListener(this);
@@ -86,10 +88,18 @@ public class TimePopupWindow extends PopupWindow implements OnClickListener {
 		WheelTime.setEND_YEAR(END_YEAR);
 	}
 
+	public void hideClearButton() {
+		btnClear.setVisibility(View.INVISIBLE);
+	}
+
+	/**
+	 * 设置默认日期
+	 */
 	public void setDefaultRange() {
 		Calendar calendar = Calendar.getInstance();
-		WheelTime.setSTART_YEAR(calendar.get(Calendar.YEAR));
-		WheelTime.setEND_YEAR(calendar.get(Calendar.YEAR) + 1);
+//		WheelTime.setSTART_YEAR(calendar.get(Calendar.YEAR));
+//		WheelTime.setEND_YEAR(calendar.get(Calendar.YEAR) + 1);
+		setRange(calendar.get(Calendar.YEAR), calendar.get(Calendar.YEAR)+1);
 	}
 
 	/**

@@ -18,4 +18,7 @@
     <string name="pickerview_hours">时</string>
     <string name="pickerview_minutes">分</string>
     <string name="pickerview_seconds">秒</string>
+    <string name="title_activity_add_customer">AddCustomerActivity</string>
+    <string name="title_activity_customer_select_f4">CustomerSelectF4Activity</string>
+    <string name="title_activity_f4">F4Activity</string>
 </resources>

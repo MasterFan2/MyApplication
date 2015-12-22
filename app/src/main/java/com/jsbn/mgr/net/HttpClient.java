@@ -4,12 +4,19 @@ import android.content.Context;
 import android.text.TextUtils;
 
 import com.jsbn.mgr.net.entity.BaseEntity;
+import com.jsbn.mgr.net.entity.Base;
+import com.jsbn.mgr.net.entity.Customer;
 import com.jsbn.mgr.net.entity.MemberResp;
 import com.jsbn.mgr.net.entity.MyMemberResp;
+import com.jsbn.mgr.net.entity.OrderResp;
 import com.jsbn.mgr.net.entity.PlannerResp;
 import com.jsbn.mgr.net.entity.ScheduleResp;
 import com.jsbn.mgr.net.entity.Version;
 import com.squareup.okhttp.OkHttpClient;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import retrofit.Callback;
 import retrofit.RequestInterceptor;
@@ -21,6 +28,7 @@ import retrofit.http.GET;
 import retrofit.http.POST;
 import retrofit.http.Path;
 import retrofit.http.Query;
+import retrofit.http.QueryMap;
 
 /**
  * Created by MasterFan on 2015/7/3.
@@ -31,9 +39,9 @@ public class HttpClient {
     private static final String PREFIX = "http://";
     private static final String END = "/api";
 
-    //private static final String URL     = "bfjs.f3322.net";//本地服务器
-    //private static final String URL     = "cd.jsbn.com";//开发服务器
-    private static final String URL = "jsbn4djg.jsbn.com";
+    private static final String URL     = "bfjs.f3322.net";//本地服务器
+//    private static final String URL     = "cd.jsbn.com";//开发服务器
+//    private static final String URL = "jsbn4djg.jsbn.com";
 
     //服务器地址信息
     //private static final String URL = "app.jsbn.love";//正式服务器
@@ -143,9 +151,37 @@ public class HttpClient {
         @GET("/schedule/screenFourKing")
         void plannerScheduleF4(@Query("tcsPersonId") int tcsPersonId, @Query("personId") int personId, @Query("lockDate") String lockDate, @Query("remark") String remark, Callback<BaseEntity> cb);
 
+        //统筹师预订四大金刚,多参数
+        @GET("/schedule/screenFourKing")
+        void plannerScheduleF4(@Query("tcsPersonId") int tcsPersonId, @Query("personId") int personId, @Query("lockDate") String lockDate, @Query("remark") String remark,
+                               @Query("hotelName")String hotelName, @Query("tcsPersonName")String tcsPersonName, @Query("groomName")String groomName, @Query("groomMobile")String groomMobile,
+                               @Query("brideName")String brideName, @Query("brideMobile")String brideMobile,Callback<BaseEntity> cb);
+
+        //根据新郎手机号查询订单
+        @GET("/schedule/orderByMobile")
+        void searchOrderByBridegroomPhone(@Query("groomMobile")String groomMobile, Callback<OrderResp> cb);
+
         //统筹师释放档期
         @GET("/schedule/cancelPreparedFKPerson")
         void cancelPlannerSchedule(@Query("scheduleId") int scheduleId, Callback<BaseEntity> cb);
+
+
+        ///////////////////////////////////客户信息//////////////////////////////////////
+        //添加客户信息
+        @GET("/fkclient/add")
+        void addCustomer(@QueryMap Map<String, String> options, Callback<BaseEntity> cb);
+
+        //修改客户信息
+        @GET("/fkclient/edit")
+        void modifyCustomer(@QueryMap Map<String, String> options, Callback<BaseEntity> cb);
+
+        //删除客户信息
+        @GET("/fkclient/del")
+        void delCustomer(@Query("groomMobile") String groomMobile, Callback<BaseEntity> cb);
+
+        //客户信息列表
+        @GET("/fkclient/list")
+        void customerList(Callback<Base<List<Customer>>> cb);
     }
 
 
@@ -284,6 +320,36 @@ public class HttpClient {
     }
 
     /**
+     * 统筹师预订四大金刚
+     *
+     * @param tcsPersonId
+     * @param personId
+     * @param lockDate
+     * @param remark
+     * @param hotelName
+     * @param tcsPersonName
+     * @param groomName
+     * @param groomMobile
+     * @param brideName
+     * @param brideMobile
+     * @param cb
+     */
+    public void plannerScheduleF4(int tcsPersonId,int personId, String lockDate, String remark, String hotelName, String tcsPersonName,String groomName, String groomMobile,
+                          String brideName, String brideMobile,Callback<BaseEntity> cb) {
+        netInterface.plannerScheduleF4(tcsPersonId, personId, lockDate, remark, hotelName, tcsPersonName, groomName, groomMobile, brideName, brideMobile, cb);
+    }
+
+    /**
+     * 根据新郎手机号查询订单
+     *
+     * @param groomMobile
+     * @param cb
+     */
+    public void searchOrderByBridegroomPhone(String groomMobile, Callback<OrderResp> cb){
+        netInterface.searchOrderByBridegroomPhone(groomMobile, cb);
+    }
+
+    /**
      * 统筹师释放档期
      *
      * @param scheduleId
@@ -291,5 +357,54 @@ public class HttpClient {
      */
     public void cancelPlannerSchedule(@Query("scheduleId") int scheduleId, Callback<BaseEntity> cb) {
         netInterface.cancelPlannerSchedule(scheduleId, cb);
+    }
+
+    ///////////////////////////////////客户信息//////////////////////////////////////
+
+    /**
+     * 添加客户信息
+     * @param customer
+     * @param cb
+     */
+    public void addCustomer(Customer customer, Callback<BaseEntity> cb){
+        Map<String, String> options = new HashMap<>();
+        options.put("groomMobile", customer.getBridegroomName());
+        options.put("groomName", customer.getBridegroomName());
+        options.put("brideMobile", customer.getBridePhone());
+        options.put("groomMobile", customer.getBrideName());
+        options.put("lockDate", customer.getDate());
+
+        if(!TextUtils.isEmpty(customer.getHotel())) {
+            options.put("hotelName", customer.getHotel());
+        }
+        netInterface.addCustomer(options, cb);
+    }
+
+    //修改客户信息
+    @GET("/fkclient/edit")
+    public void modifyCustomer(Customer customer, Callback<BaseEntity> cb){
+        Map<String, String> options = new HashMap<>();
+        options.put("groomMobile", customer.getBridegroomName());
+        options.put("groomName", customer.getBridegroomName());
+        options.put("brideMobile", customer.getBridePhone());
+        options.put("groomMobile", customer.getBrideName());
+        options.put("lockDate", customer.getDate());
+
+        if(!TextUtils.isEmpty(customer.getHotel())) {
+            options.put("hotelName", customer.getHotel());
+        }
+        netInterface.addCustomer(options, cb);
+    }
+
+    //删除客户信息
+    @GET("/fkclient/del")
+    public void delCustomer(String groomMobile, Callback<BaseEntity> cb){
+        netInterface.delCustomer(groomMobile, cb);
+    }
+
+    //客户信息列表
+    @GET("/fkclient/list")
+    public void customerList(Callback<Base<List<Customer>>> cb){
+        netInterface.customerList(cb);
     }
 }

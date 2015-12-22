@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/gray_900"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:padding="15dp"
+            android:text="客户列表"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            />
+
+        <TextView
+            android:id="@+id/customer_add_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:text="新增客户"
+            android:textColor="@android:color/white"
+            />
+
+        <TextView
+            android:id="@+id/customer_date_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:gravity="center"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:text="档期筛选"
+            android:textColor="@android:color/white"
+            />
+    </RelativeLayout>
+
+    <RelativeLayout
+        xmlns:poplar="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/gray_200"
+        >
+
+        <RelativeLayout
+            android:id="@+id/planner_search_layout"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/gray_400"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            >
+
+            <TextView
+                android:id="@+id/planner_search_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="搜索"
+                android:textColor="@color/indexer_text_color"
+                android:visibility="gone"
+                />
+
+            <EditText
+                android:id="@+id/planner_search_edit"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="8dp"
+                android:layout_toLeftOf="@id/planner_search_txt"
+                android:background="@drawable/search_btn_bg"
+                android:hint="搜索"
+                android:paddingLeft="16dp"
+                android:singleLine="true"
+                android:textColor="@color/gray_800"
+                android:textColorHint="@color/gray_500"
+                />
+        </RelativeLayout>
+        <ListView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/planner_search_layout"
+            android:layout_marginRight="20dp"
+            android:padding="8dp"
+            />
+
+        <com.jsbn.mgr.widget.indexer.FancyIndexer
+            android:id="@+id/bar"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_below="@id/planner_search_layout"
+            poplar:additionalTipOffset="40dip"
+            poplar:fontColor="@color/indexer_text_color"
+            poplar:maxBezierHeight="150dip"
+            poplar:maxBezierWidth="180dip"
+            poplar:maxFontSize="60"
+            poplar:minFontSize="32"
+            poplar:tipFontSize="72"
+            poplar:widthOffset="15dip"/>
+
+        <TextView
+            android:id="@+id/tv_index_center"
+            android:layout_width="160dp"
+            android:layout_height="100dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/bg_index"
+            android:gravity="center"
+            android:text="A"
+            android:textColor="#FFFFFF"
+            android:textSize="36sp"
+            android:visibility="gone"/>
+
+    </RelativeLayout>
+</LinearLayout>

@@ -48,6 +48,11 @@ public abstract class BaseActivity extends AppCompatActivity {
         overridePendingTransition(R.anim.roll_up, R.anim.roll);
     }
 
+    public void animStartForResult(Intent intent, int requestCode){
+        startActivityForResult(intent, requestCode);
+        overridePendingTransition(R.anim.roll_up, R.anim.roll);
+    }
+
     /**
      * anim launch Activity
      */

@@ -168,9 +168,9 @@ import retrofit.client.Response;
 //    /**
 //     * validate code call back
 //     */
-//    private Callback<BaseResp> forgetCallback = new Callback<BaseResp>() {
+//    private Callback<Base> forgetCallback = new Callback<Base>() {
 //        @Override
-//        public void success(BaseResp baseResp, Response response) {
+//        public void success(Base baseResp, Response response) {
 //            if(baseResp.getCode() == 200){
 //                View view = LayoutInflater.from(context).inflate(R.layout.dialog_signup_tips_layout, null);
 //                TextView tipsTxt = (TextView) view.findViewById(R.id.signup_tips_txt);
@@ -201,9 +201,9 @@ import retrofit.client.Response;
 //    /**
 //     * validate code call back
 //     */
-//    private Callback<BaseResp> cb = new Callback<BaseResp>() {
+//    private Callback<Base> cb = new Callback<Base>() {
 //        @Override
-//        public void success(BaseResp baseResp, Response response) {
+//        public void success(Base baseResp, Response response) {
 //            if(baseResp.getCode() == 200){
 //                T.s(context, "短信发送成功,请注意查收!");
 //            }else {

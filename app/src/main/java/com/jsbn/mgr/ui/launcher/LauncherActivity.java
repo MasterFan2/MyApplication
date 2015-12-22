@@ -24,6 +24,7 @@ import com.jsbn.mgr.ui.HomeActivity;
 import com.jsbn.mgr.ui.base.ActivityFeature;
 import com.jsbn.mgr.ui.base.BaseActivity;
 import com.jsbn.mgr.ui.login.LoginActivity;
+import com.jsbn.mgr.utils.DateUtil;
 import com.jsbn.mgr.utils.NetSpeed;
 import com.jsbn.mgr.utils.PackageUtil;
 import com.jsbn.mgr.utils.S;
@@ -156,35 +157,6 @@ public class LauncherActivity extends BaseActivity implements OnClickListener {
     @Override
     public void initialize() {
 
-//        //需要加密的数据
-//        String public_key = "http://open.weather.com.cn/data/?areaid=101010100&type=forecast_v&date=yyyyMMddHHmm&appid=2e758d9037bf34ab";
-//        //密钥
-//        String private_key = "7ee52f_SmartWeatherAPI_57e2c04";
-//
-//        String str = standardURLEncoder(public_key, private_key);
-//
-//        System.out.println(str);
-
-//        ArrayList<String> list1 = new ArrayList<>();
-//
-//        list1.add("1");
-//        list1.add("3");
-//        list1.add("5");
-//        list1.add("7");
-//
-//        ArrayList<String> list2 = new ArrayList<>();
-//        list2.add("1");
-//        list2.add("2");
-//        list2.add("3");
-//        list2.add("4");
-//        list2.add("5");
-//        list2.add("6");
-//        list2.add("7");
-//
-//        boolean diff = list1.retainAll(list2);
-//
-//        S.o("::" + list1.size());
-
         //----------------------------------
         HttpClient.getInstance().upgradeCheck(2, PackageUtil.getVersion(context), 2, cb);
 
@@ -255,8 +227,14 @@ public class LauncherActivity extends BaseActivity implements OnClickListener {
                 T.s(context, "用户名密码错误");
                 animStart(LoginActivity.class);
                 finish();
-            }else{
+            }else if(members.getCode() == 1001020){
+                T.s(context, "该用户不存在 ");
+                animStart(LoginActivity.class);
+                finish();
+            } else {
                 T.s(context, "登录失败 ");
+                animStart(LoginActivity.class);
+                finish();
             }
         }
 
