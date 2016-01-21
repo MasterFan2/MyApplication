@@ -39,9 +39,9 @@ public class HttpClient {
     private static final String PREFIX = "http://";
     private static final String END = "/api";
 
-    private static final String URL     = "bfjs.f3322.net";//本地服务器
+//    private static final String URL     = "bfjs.f3322.net";//本地服务器
 //    private static final String URL     = "cd.jsbn.com";//开发服务器
-//    private static final String URL = "jsbn4djg.jsbn.com";
+    private static final String URL = "jsbn4djg.jsbn.com";
 
     //服务器地址信息
     //private static final String URL = "app.jsbn.love";//正式服务器
