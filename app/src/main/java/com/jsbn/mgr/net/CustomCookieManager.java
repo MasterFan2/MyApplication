@@ -24,9 +24,7 @@ public class CustomCookieManager extends CookieManager {
 
     @Override
     public void put(URI uri, Map<String, List<String>> responseHeaders) throws IOException {
-
         super.put(uri, responseHeaders);
-
         if (responseHeaders != null && responseHeaders.get("Set-Cookie") != null)
             for (String string : responseHeaders.get("Set-Cookie")) {
 
@@ -55,5 +53,4 @@ public class CustomCookieManager extends CookieManager {
                 }
             }
     }
-
 }

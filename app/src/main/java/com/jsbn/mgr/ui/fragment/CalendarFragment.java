@@ -25,6 +25,7 @@ import com.jsbn.mgr.ui.base.BaseFragment;
 import com.jsbn.mgr.ui.base.FragmentFeature;
 import com.jsbn.mgr.utils.DateUtil;
 import com.jsbn.mgr.utils.InputMethodUtil;
+import com.jsbn.mgr.utils.S;
 import com.jsbn.mgr.utils.T;
 import com.jsbn.mgr.widget.common.EditText;
 import com.jsbn.mgr.widget.datepicker.bizs.calendars.DPCManager;
@@ -288,7 +289,6 @@ public class CalendarFragment extends BaseFragment implements MonthView.OnDaySel
         picker.setOnDateSelectedListener(new DatePicker.OnDateSelectedListener() {
             @Override
             public void onDateSelected(List<String> date) {
-//                unReleaseAll();
                 getAllSchedules();
             }
         });
@@ -333,7 +333,7 @@ public class CalendarFragment extends BaseFragment implements MonthView.OnDaySel
                     for (int i = 0; i < lists.size(); i++) {
                         Schedule schedule = lists.get(i);
                         String date = schedule.getScheduleDate().split(" ")[0];
-
+                        S.o(":::>" + date);
                         int year = Integer.parseInt(date.substring(0, date.indexOf("-")));
                         int month = Integer.parseInt(date.substring(date.indexOf("-") + 1, date.lastIndexOf("-")));
                         int day = Integer.parseInt(date.substring(date.lastIndexOf("-") + 1, date.length()));
@@ -410,7 +410,7 @@ public class CalendarFragment extends BaseFragment implements MonthView.OnDaySel
 
         if(!DateUtil.isAfterToday(selectedDay)){
             usedBtn.setEnabled(false);
-            return;
+        //   return;
         }
 
         if(usedBtn.isEnabled() == false){
@@ -427,8 +427,9 @@ public class CalendarFragment extends BaseFragment implements MonthView.OnDaySel
             int year  = Integer.parseInt(date.substring(0, date.indexOf("-")));
             int month = Integer.parseInt(date.substring(date.indexOf("-") + 1, date.lastIndexOf("-")));
             int day   = Integer.parseInt(date.substring(date.lastIndexOf("-") + 1, date.length()));
-
+            //
             date = year + "-" + month + "-" + day;
+//            date = year + "-" + (month < 10 ? "0" + month : month) + "-" + (day < 10 ? "0" + day : day);
             if (date.equals(dd)){//如果选择的日期在占用日期里面
                 desc =  schedule.getRemark();
                 descTxt.setText("备注：" + schedule.getRemark().replace("<br />", "\n"));

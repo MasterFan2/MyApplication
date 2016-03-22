@@ -12,6 +12,7 @@ import com.jsbn.mgr.net.entity.OrderResp;
 import com.jsbn.mgr.net.entity.PlannerResp;
 import com.jsbn.mgr.net.entity.ScheduleResp;
 import com.jsbn.mgr.net.entity.Version;
+import com.jsbn.mgr.utils.S;
 import com.squareup.okhttp.OkHttpClient;
 
 import java.util.HashMap;
@@ -80,6 +81,7 @@ public class HttpClient {
                     public void intercept(RequestFacade request) {
 
                         String temp = PreferenceUtils.getValue(mContext, PreferenceUtils.PREFERENCE_B_TOKEN, PreferenceUtils.DataType.STRING);
+                        S.o(":::" + temp);
                         if (!TextUtils.isEmpty(temp)) {
                             // 设置JSESSIONID
                             request.addHeader("btoken", temp);

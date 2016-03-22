@@ -38,6 +38,7 @@ import com.jsbn.mgr.widget.velocimeter.VelocimeterView;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.HttpHandler;
+import com.lidroid.xutils.http.RequestParams;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 
@@ -347,10 +348,13 @@ public class LauncherActivity extends BaseActivity implements OnClickListener {
             file.delete();
 
         HttpUtils http = new HttpUtils();
-        handler = http.download(url,saveFile,
-                true, // 如果目标文件存在，接着未完成的部分继续下载。服务器不支持RANGE时将从新下载。
-                true, // 如果从请求返回信息中获取到文件名，下载完成后自动重命名。
-                callBack);
+        RequestParams params = new RequestParams();
+        params.addHeader("Referer", "http://www.jsbn.love");//防盗链
+        http.download(url,saveFile,params,true, true, callBack);
+//        handler = http.download(url,saveFile,
+//                true, // 如果目标文件存在，接着未完成的部分继续下载。服务器不支持RANGE时将从新下载。
+//                true, // 如果从请求返回信息中获取到文件名，下载完成后自动重命名。
+//                callBack);
     }
 
     private RequestCallBack<File> requestCallBack = new RequestCallBack<File>() {

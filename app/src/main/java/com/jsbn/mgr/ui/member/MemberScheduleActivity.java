@@ -70,7 +70,7 @@ public class MemberScheduleActivity extends BaseActivity implements MonthView.On
 
     private EditText addDialogDescEdit;
 
-    private String selectedDay ;//选择的日期
+    private String selectedDay;//选择的日期
 
     private String desc = "";    //备注
 
@@ -85,12 +85,12 @@ public class MemberScheduleActivity extends BaseActivity implements MonthView.On
     private AlertDialog dialog;
 
     int currentMonth = Calendar.getInstance().get(Calendar.MONTH) + 1;
-    int currentYear  = Calendar.getInstance().get(Calendar.YEAR);
+    int currentYear = Calendar.getInstance().get(Calendar.YEAR);
 
     @OnClick(R.id.remark_btn)
-    public void remark(View view){
+    public void remark(View view) {
         isAddDesc = false;
-        if(!TextUtils.isEmpty(selectedDay)){
+        if (!TextUtils.isEmpty(selectedDay)) {
             addDialogHeadTxt.setText("修改档期备注");
             addDialogDescTxt.setText("日期：" + selectedDay);
             addDialogDescEdit.setText(desc);
@@ -100,10 +100,11 @@ public class MemberScheduleActivity extends BaseActivity implements MonthView.On
 
     /**
      * release
+     *
      * @param view
      */
     @OnClick(R.id.self_release_btn)
-    public void selfRelease(View view){
+    public void selfRelease(View view) {
 //        if(!TextUtils.isEmpty(selectedDay))
 //            picker.selfUnChecked(selectedDay);
         view.setEnabled(false);
@@ -123,11 +124,11 @@ public class MemberScheduleActivity extends BaseActivity implements MonthView.On
         personId = getIntent().getStringExtra("personId");
 
         //init description dialog
-        View view     = LayoutInflater.from(context).inflate(R.layout.dialog_add_description_layout, null);
+        View view = LayoutInflater.from(context).inflate(R.layout.dialog_add_description_layout, null);
         View headView = LayoutInflater.from(context).inflate(R.layout.dialog_head_layout, null);
         addDialogHeadTxt = (TextView) headView.findViewById(R.id.dialog_head_txt);
         addDialogDescTxt = (TextView) view.findViewById(R.id.add_desc_date_txt);
-        addDialogDescEdit= (EditText) view.findViewById(R.id.add_desc_edit);
+        addDialogDescEdit = (EditText) view.findViewById(R.id.add_desc_edit);
 
         ViewHolder holder = new ViewHolder(view);
         addDescDialog = new MTDialog.Builder(context)
@@ -142,15 +143,15 @@ public class MemberScheduleActivity extends BaseActivity implements MonthView.On
         //
 
         Calendar calendar = Calendar.getInstance();
-        int year  = calendar.get(Calendar.YEAR);
+        int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH) + 1;
-        int day   = calendar.get(Calendar.DAY_OF_MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
 
         //
         picker.setOnRefreshClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new Handler(){
+                new Handler() {
                     @Override
                     public void handleMessage(Message msg) {
                         picker.refresh();
@@ -191,7 +192,7 @@ public class MemberScheduleActivity extends BaseActivity implements MonthView.On
 
         picker.setDate(year, month);
 
-        if(!TextUtils.isEmpty(personId))
+        if (!TextUtils.isEmpty(personId))
             HttpClient.getInstance().getSchedules(Integer.parseInt(personId), cb);
     }
 
@@ -199,9 +200,9 @@ public class MemberScheduleActivity extends BaseActivity implements MonthView.On
         @Override
         public void success(ScheduleResp scheduleResp, Response response) {
             dialog.dismiss();
-            if(scheduleResp.getCode() == 200){
+            if (scheduleResp.getCode() == 200) {
                 lists = scheduleResp.getData();
-                if(lists != null && lists.size() > 0){
+                if (lists != null && lists.size() > 0) {
                     for (int i = 0; i < lists.size(); i++) {
                         Schedule schedule = lists.get(i);
                         String date = schedule.getScheduleDate().split(" ")[0];
@@ -209,11 +210,11 @@ public class MemberScheduleActivity extends BaseActivity implements MonthView.On
                         int month = Integer.parseInt(date.substring(date.indexOf("-") + 1, date.lastIndexOf("-")));
                         int day = Integer.parseInt(date.substring(date.lastIndexOf("-") + 1, date.length()));
 
-                        if(currentMonth == month && year == currentYear){
+                        if (currentMonth == month && year == currentYear) {
                             date = year + "-" + month + "-" + day;
-                            if(schedule.getStatusId() == 4) picker.selfChecked(date);
-                            if(schedule.getStatusId() == 1) picker.jsbnUsedCheck(date);
-                            if(schedule.getStatusId() == 2) picker.jsbnOrderCheck(date);
+                            if (schedule.getStatusId() == 4) picker.selfChecked(date);
+                            if (schedule.getStatusId() == 1) picker.jsbnUsedCheck(date);
+                            if (schedule.getStatusId() == 2) picker.jsbnOrderCheck(date);
                         }
                     }
                 }
@@ -242,7 +243,7 @@ public class MemberScheduleActivity extends BaseActivity implements MonthView.On
 
         selectTxt.setText(dd);//设置选中的日期
 
-        if(TextUtils.isEmpty(dd)) {
+        if (TextUtils.isEmpty(dd)) {
             usedBtn.setEnabled(false);
             releaseBtn.setEnabled(false);
             remarkBtn.setEnabled(false);
@@ -250,17 +251,17 @@ public class MemberScheduleActivity extends BaseActivity implements MonthView.On
             return;
         }
 
-        if(!DateUtil.isAfterToday(selectedDay)){
+        if (!DateUtil.isAfterToday(selectedDay)) {
             usedBtn.setEnabled(false);
             return;
         }
 
-        if(usedBtn.isEnabled() == false){
+        if (usedBtn.isEnabled() == false) {
             usedBtn.setEnabled(true);
         }
 
         //显示备注信息
-        final int size =lists == null ? 0 : lists.size();
+        final int size = lists == null ? 0 : lists.size();
         boolean finded = false;
         for (int i = 0; i < size; i++) {
             Schedule schedule = lists.get(i);
@@ -271,27 +272,27 @@ public class MemberScheduleActivity extends BaseActivity implements MonthView.On
             int day = Integer.parseInt(date.substring(date.lastIndexOf("-") + 1, date.length()));
 
             date = year + "-" + month + "-" + day;
-            if (date.equals(dd)){//如果选择的日期在占用日期里面
-                desc =  schedule.getRemark();
+            if (date.equals(dd)) {//如果选择的日期在占用日期里面
+                desc = schedule.getRemark();
                 descTxt.setText("备注：" + schedule.getRemark().replace("<br />", "\n"));
                 usedBtn.setEnabled(false);
-                if(schedule.getStatusId() == 4) {//只有自己占用的日期才能释放
+                if (schedule.getStatusId() == 4) {//只有自己占用的日期才能释放
                     releaseBtn.setEnabled(true);
                     remarkBtn.setEnabled(true);
-                }else {
+                } else {
                     remarkBtn.setEnabled(false);
                 }
                 finded = true;
                 break;
-            }else{
+            } else {
                 desc = "";
             }
         }
-        if(!finded) descTxt.setText("备注：-" );
+        if (!finded) descTxt.setText("备注：-");
     }
 
     @OnClick(R.id.self_used_btn)
-    public void selfUsed(View view){
+    public void selfUsed(View view) {
         isAddDesc = true;
         addDialogDescTxt.setText("日期：" + selectedDay);
         addDialogHeadTxt.setText("占用档期");
@@ -301,10 +302,10 @@ public class MemberScheduleActivity extends BaseActivity implements MonthView.On
 
     @Override
     public void onMonthChange(int month) {
-        if(currentMonth == 12 && month == 1){
+        if (currentMonth == 12 && month == 1) {
             currentYear += 1;
         }
-        if(currentMonth == 1 && month == 12){
+        if (currentMonth == 1 && month == 12) {
             currentYear -= 1;
         }
         currentMonth = month;
@@ -312,7 +313,7 @@ public class MemberScheduleActivity extends BaseActivity implements MonthView.On
         getAllSchedules();
     }
 
-    private void getAllSchedules(){
+    private void getAllSchedules() {
         dialog.show();
         picker.getSelfUsed().clear();
         picker.getJsbnOrder().clear();
@@ -324,7 +325,7 @@ public class MemberScheduleActivity extends BaseActivity implements MonthView.On
         @Override
         public void success(BaseEntity baseEntity, Response response) {
 
-            if(baseEntity.getCode() == 200){
+            if (baseEntity.getCode() == 200) {
                 T.s(context, "操作成功!");
 
                 //查询当前档期
@@ -334,7 +335,7 @@ public class MemberScheduleActivity extends BaseActivity implements MonthView.On
                 picker.selfUnChecked(selectedDay);
                 descTxt.setText("备注：");
 
-            }else {
+            } else {
                 T.s(context, "操作失败!");
                 releaseBtn.setEnabled(true);
             }
@@ -351,8 +352,8 @@ public class MemberScheduleActivity extends BaseActivity implements MonthView.On
         @Override
         public void success(BaseEntity baseEntity, Response response) {
 
-            if(baseEntity.getCode() == 200){
-                if(addDescDialog != null && addDescDialog.isShowing()) addDescDialog.dismiss();
+            if (baseEntity.getCode() == 200) {
+                if (addDescDialog != null && addDescDialog.isShowing()) addDescDialog.dismiss();
                 T.s(context, "操作成功!");
                 descTxt.setText("备注：" + addDialogDescEdit.getText().toString());
                 addDialogDescEdit.setText("");
@@ -360,7 +361,7 @@ public class MemberScheduleActivity extends BaseActivity implements MonthView.On
                 releaseBtn.setEnabled(true);
                 //查询当前档期
                 getAllSchedules();
-            }else {
+            } else {
                 T.s(context, "操作失败!");
                 usedBtn.setEnabled(true);
             }
@@ -375,7 +376,7 @@ public class MemberScheduleActivity extends BaseActivity implements MonthView.On
 
     @Override
     public void onClick(MTDialog dialog, View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.dialog_cancel_Btn:
                 InputMethodUtil.hideInputMethod(MemberScheduleActivity.this);
                 usedBtn.setEnabled(true);
@@ -383,21 +384,21 @@ public class MemberScheduleActivity extends BaseActivity implements MonthView.On
                 addDialogDescEdit.setText("");
                 dialog.dismiss();
                 break;
-            case  R.id.dialog_confrim_btn:
+            case R.id.dialog_confrim_btn:
                 String desc = addDialogDescEdit.getText().toString();
-                if(TextUtils.isEmpty(desc)){
+                if (TextUtils.isEmpty(desc)) {
                     addDialogDescEdit.setError("请输入备注信息");
                     return;
                 }
                 addDialogDescEdit.clearError();
                 InputMethodUtil.hideInputMethod(MemberScheduleActivity.this);
-                if(!TextUtils.isEmpty(selectedDay)){
+                if (!TextUtils.isEmpty(selectedDay)) {
                     String account = PreUtil.getLoginAccount(context);
-                    if(!TextUtils.isEmpty(account)){
-                        if(isAddDesc) HttpClient.getInstance().usedSchedule(selectedDay, selectedDay, Integer.parseInt(personId), desc, usedScheduleCallback);
-                        else          HttpClient.getInstance().remarkSchedule(Integer.parseInt(personId), selectedDay, desc, usedScheduleCallback);
+                    if (!TextUtils.isEmpty(account)) {
+                        if (isAddDesc) HttpClient.getInstance().usedSchedule(selectedDay, selectedDay, Integer.parseInt(personId), desc, usedScheduleCallback);
+                        else HttpClient.getInstance().remarkSchedule(Integer.parseInt(personId), selectedDay, desc, usedScheduleCallback);
 
-                    }else {
+                    } else {
                         T.s(context, "登录过期， 请重新登录");
                         view.setEnabled(true);
                     }
